@@ -154,11 +154,20 @@ CREATE TABLE disponibile (
 -- ----------------- --
 
 INSERT INTO utente(username, email) VALUES
-  ('Raja Ramos', 'rajaramos@google.ca'),
-  ('Serina Hodges', 'serinahodges3652@outlook.com'),
-  ('Ronan Lowery', 'ronanlowery@yahoo.com'),
-  ('Owen Howard', 'owenhoward8710@outlook.ca'),
-  ('Ali Murray', 'alimurray@outlook.org');
+  ('TechGuru1', 'techguru@email.com'),
+  ('garden-lover1', 'gardenlover@email.com'),
+  ('B00KW0RM', 'bookworm@email.com'),
+  ('raja-ramos', 'rajaramos@google.ca'),
+  ('SerinaHodges', 'serinahodges3652@outlook.com'),
+  ('ronanlowery', 'ronanlowery@yahoo.com'),
+  ('owen87', 'owenhoward8710@outlook.ca'),
+  ('amurray', 'alimurray@outlook.org')
+  ('fITNESSfAN', 'fitnessfan@email.com'),
+  ('trvlbg', 'travelbug@email.com'),
+  ('foooooodie', 'foodie@email.com'),
+  ('FilmFanatic', 'filmfanatic@email.com'),
+  ('hiking-enthusiast', 'hikingenthusiast@email.com'),
+  ('MUSICALMAVEN1', 'musicalmaven@email.com');
 
 UPDATE utente SET salt = MD5(UUID());
 UPDATE utente SET password_md5_salt = MD5(CONCAT(username, salt));
@@ -214,20 +223,20 @@ INSERT INTO datasheet VALUES
   ('IRFZ44N', 'Infineon 2012', 4, CURRENT_DATE());
 
 INSERT INTO file VALUES
-  (12345678, '../datasheets/placeholder-logo.jpg', NULL, NULL, NULL),
-  (DEFAULT, '../datasheets/SN74HCT04-907253.pdf', 'SN74HCT04', 'TI 08 Jul 2004', 5),
-  (DEFAULT, '../datasheets/IRFZ44N-879023.pdf', 'IRFZ44N', 'Vishay 01 Jan 2022', 20),
-  (DEFAULT, '../datasheets/IRFZ44N-879023.pdf', 'IRFZ44N', 'Vishay 01 Jan 2022', 23),
-  (DEFAULT, '../datasheets/IRFZ44N-879023.pdf', 'IRFZ44N', 'Vishay 01 Jan 2022', 37),
-  (DEFAULT, '../datasheets/IRFZ44N-563456.pdf', 'IRFZ44N', 'Infineon 2012', 10),
-  (DEFAULT, '../datasheets/IRFZ44ND-564563.pdf', 'IRFZ44ND', 'Samsung v1.2', 20),
-  (DEFAULT, '../datasheets/IRFZ44ND-002342.pdf', 'IRFZ44ND', 'Samsung v1.0', 11),
-  (DEFAULT, '../datasheets/logo1.png', NULL, NULL, NULL),
-  (DEFAULT, '../datasheets/logo2.png', NULL, NULL, NULL),
-  (DEFAULT, '../datasheets/logo3.png', NULL, NULL, NULL),
-  (DEFAULT, '../datasheets/ASDFADR.gif', NULL, NULL, NULL);
+  (600, 'dynamic/no-logo.png', NULL, NULL, NULL),
+  (DEFAULT, 'dynamic/datasheets/SN74HCT04-907253.pdf', 'SN74HCT04', 'TI 08 Jul 2004', 5),
+  (DEFAULT, 'dynamic/datasheets/IRFZ44N-879023.pdf', 'IRFZ44N', 'Vishay 01 Jan 2022', 20),
+  (DEFAULT, 'dynamic/datasheets/IRFZ44N-879023.pdf', 'IRFZ44N', 'Vishay 01 Jan 2022', 23),
+  (DEFAULT, 'dynamic/datasheets/IRFZ44N-879023.pdf', 'IRFZ44N', 'Vishay 01 Jan 2022', 37),
+  (DEFAULT, 'dynamic/datasheets/IRFZ44N-563456.pdf', 'IRFZ44N', 'Infineon 2012', 10),
+  (DEFAULT, 'dynamic/datasheets/IRFZ44ND-564563.pdf', 'IRFZ44ND', 'Samsung v1.2', 20),
+  (DEFAULT, 'dynamic/datasheets/IRFZ44ND-002342.pdf', 'IRFZ44ND', 'Samsung v1.0', 11),
+  (DEFAULT, 'dynamic/datasheets/logo1.png', NULL, NULL, NULL),
+  (DEFAULT, 'dynamic/datasheets/logo2.png', NULL, NULL, NULL),
+  (DEFAULT, 'dynamic/datasheets/logo3.png', NULL, NULL, NULL),
+  (DEFAULT, 'dynamic/datasheets/ASDFADR.gif', NULL, NULL, NULL);
 
-UPDATE azienda_produttrice SET fk_file_id_file=12345678;
+UPDATE azienda_produttrice SET fk_file_id_file=600;
 
 INSERT INTO preferiti_d VALUES
   ('IRFZ44N', 'Infineon 2012', 'Ali Murray'),
