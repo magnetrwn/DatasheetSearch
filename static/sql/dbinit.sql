@@ -154,6 +154,7 @@ CREATE TABLE disponibile (
 -- ----------------- --
 
 INSERT INTO utente(username, email) VALUES
+  ('admin', ''),
   ('TechGuru1', 'techguru@email.com'),
   ('garden-lover1', 'gardenlover@email.com'),
   ('B00KW0RM', 'bookworm@email.com'),
@@ -239,25 +240,25 @@ INSERT INTO file VALUES
 UPDATE azienda_produttrice SET fk_file_id_file=600;
 
 INSERT INTO preferiti_d VALUES
-  ('IRFZ44N', 'Infineon 2012', 'Ali Murray'),
-  ('IRFZ44ND', 'Samsung v1.0', 'Ali Murray'),
-  ('IRFZ44N', 'Vishay 01 Jan 2022', 'Owen Howard'),
-  ('IRFZ44ND', 'Samsung v1.0', 'Serina Hodges'),
-  ('SN74HCT04', 'TI 08 Jul 2004', 'Raja Ramos');
+  ('IRFZ44N', 'Infineon 2012', 'amurray'),
+  ('IRFZ44ND', 'Samsung v1.0', 'amurray'),
+  ('IRFZ44N', 'Vishay 01 Jan 2022', 'owen87'),
+  ('IRFZ44ND', 'Samsung v1.0', 'SerinaHodges'),
+  ('SN74HCT04', 'TI 08 Jul 2004', 'raja-ramos');
 
 INSERT INTO preferiti_az VALUES
-  ('STMicroelectronics', 'Ali Murray'),
-  ('Infineon Technologies', 'Serina Hodges'),
-  ('STMicroelectronics', 'Raja Ramos'),
-  ('Infineon Technologies', 'Raja Ramos'),
-  ('Texas Instruments', 'Raja Ramos');
+  ('STMicroelectronics', 'amurray'),
+  ('Infineon Technologies', 'SerinaHodges'),
+  ('STMicroelectronics', 'raja-ramos'),
+  ('Infineon Technologies', 'raja-ramos'),
+  ('Texas Instruments', 'raja-ramos');
 
 INSERT INTO preferiti_p VALUES
-  (8, 'Raja Ramos'), 
-  (8, 'Serina Hodges'), 
-  (11, 'Serina Hodges'), 
-  (24, 'Serina Hodges'), 
-  (30, 'Serina Hodges');
+  (8, 'raja-ramos'), 
+  (8, 'SerinaHodges'), 
+  (11, 'SerinaHodges'), 
+  (24, 'SerinaHodges'), 
+  (30, 'SerinaHodges');
   
 INSERT INTO disponibile VALUES
   (1, 8),
