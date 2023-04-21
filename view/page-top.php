@@ -11,7 +11,9 @@
       <input class="ml-2 outline-none bg-transparent" type="text" name="search" id="search" placeholder="Cerca ovunque..." />
     <ul class="flex items-center space-x-6">
       <li class="font-semibold text-gray-700">
-		<a href="index.php?goto=login">Login</a>
+		<a href="index.php?goto=login">
+      <?php echo $loginlabel; ?>
+    </a>
       </li>
       <li class="font-semibold text-gray-700">
 		<a href="#">Register</a>

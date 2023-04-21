@@ -8,7 +8,12 @@
 /////////////////////
 // Header (navbar) //
 /////////////////////
-include("view/page-top.html");
+session_name("dssessionid");
+session_start();
+$loginlabel = "Login";
+if(isset($_SESSION["user"]))
+    $loginlabel = "Logout";
+include("view/page-top.php");
 ?>
 
 <div><?php
@@ -27,22 +32,21 @@ switch($goto) {
     case "homepage":
         // Pagina home
         $welcome = "Benvenuto su Datasheet Search!";
-        if(isset($_SESSION["user"])) {
-            echo $_SESSION["user"];
+        if(isset($_SESSION["user"]))
             // Mostra username se loggato
-            $welcome = "Benvenuto ".$_SESSION["user"]."!";
-            include("view/page-homepage.php");
-        }
-        else
-            include("view/page-homepage.php");
+            $welcome = "Bentornato, ".$_SESSION["user"]."!";
+        include("view/page-homepage.php");
         break;
 
     case "login":
         // Pagina login
         include_once("model/util-js.php");
-        if(isset($_SESSION["user"]))
-            // Già loggato, torna alla homepage
+        if(isset($_SESSION["user"])) {
+            // Se già loggato, effettua il logout
+            unset($_SESSION["user"]);
+            session_destroy();
             redirect_js("index.php?goto=homepage");
+        }
         else
             include("view/auth/page-login.html");
         break;
