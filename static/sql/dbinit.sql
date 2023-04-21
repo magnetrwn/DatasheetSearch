@@ -154,7 +154,7 @@ CREATE TABLE disponibile (
 -- ----------------- --
 
 INSERT INTO utente(username, email) VALUES
-  ('admin', '1'),
+  ('admin', 'admin@noreply.admin.local'),
   ('TechGuru1', 'techguru@email.com'),
   ('garden-lover1', 'gardenlover@email.com'),
   ('B00KW0RM', 'bookworm@email.com'),
