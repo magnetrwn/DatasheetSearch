@@ -154,7 +154,7 @@ CREATE TABLE disponibile (
 -- ----------------- --
 
 INSERT INTO utente(username, email) VALUES
-  ('admin', ''),
+  ('admin', '1'),
   ('TechGuru1', 'techguru@email.com'),
   ('garden-lover1', 'gardenlover@email.com'),
   ('B00KW0RM', 'bookworm@email.com'),
@@ -162,7 +162,7 @@ INSERT INTO utente(username, email) VALUES
   ('SerinaHodges', 'serinahodges3652@outlook.com'),
   ('ronanlowery', 'ronanlowery@yahoo.com'),
   ('owen87', 'owenhoward8710@outlook.ca'),
-  ('amurray', 'alimurray@outlook.org')
+  ('amurray', 'alimurray@outlook.org'),
   ('fITNESSfAN', 'fitnessfan@email.com'),
   ('trvlbg', 'travelbug@email.com'),
   ('foooooodie', 'foodie@email.com'),
@@ -173,6 +173,7 @@ INSERT INTO utente(username, email) VALUES
 UPDATE utente SET salt = MD5(UUID());
 UPDATE utente SET password_md5_salt = MD5(CONCAT(username, salt));
 -- Per ora le password sono i loro username
+SYSTEM echo 'Warning: Default users have their passwords set to username.';
 
 INSERT INTO package(alias) VALUES
   ('BGA'), ('CAN'), ('CERDIP'), ('CFP'), ('CLCC'), ('CPGA'), ('CQFP'), ('DIP'),
@@ -240,26 +241,26 @@ INSERT INTO file VALUES
 UPDATE azienda_produttrice SET fk_file_id_file=600;
 
 INSERT INTO preferiti_d VALUES
-  ('IRFZ44N', 'Infineon 2012', 'amurray'),
-  ('IRFZ44ND', 'Samsung v1.0', 'amurray'),
-  ('IRFZ44N', 'Vishay 01 Jan 2022', 'owen87'),
-  ('IRFZ44ND', 'Samsung v1.0', 'SerinaHodges'),
-  ('SN74HCT04', 'TI 08 Jul 2004', 'raja-ramos');
+  ('IRFZ44N', 'Infineon 2012', 'admin'),
+  ('IRFZ44ND', 'Samsung v1.0', 'admin'),
+  ('IRFZ44N', 'Vishay 01 Jan 2022', 'admin'),
+  ('IRFZ44ND', 'Samsung v1.0', 'TechGuru1'),
+  ('SN74HCT04', 'TI 08 Jul 2004', 'admin');
 
 INSERT INTO preferiti_az VALUES
-  ('STMicroelectronics', 'amurray'),
-  ('Infineon Technologies', 'SerinaHodges'),
-  ('STMicroelectronics', 'raja-ramos'),
-  ('Infineon Technologies', 'raja-ramos'),
-  ('Texas Instruments', 'raja-ramos');
+  ('STMicroelectronics', 'admin'),
+  ('Infineon Technologies', 'admin'),
+  ('STMicroelectronics', 'TechGuru1'),
+  ('Infineon Technologies', 'TechGuru1'),
+  ('Texas Instruments', 'admin');
 
 INSERT INTO preferiti_p VALUES
-  (8, 'raja-ramos'), 
-  (8, 'SerinaHodges'), 
-  (11, 'SerinaHodges'), 
-  (24, 'SerinaHodges'), 
-  (30, 'SerinaHodges');
-  
+  (8, 'admin'), 
+  (8, 'TechGuru1'), 
+  (11, 'admin'), 
+  (24, 'admin'), 
+  (30, 'admin');
+
 INSERT INTO disponibile VALUES
   (1, 8),
   (5, 8),
@@ -267,3 +268,5 @@ INSERT INTO disponibile VALUES
   (2, 20),
   (2, 21),
   (4, 21);
+
+SYSTEM echo 'Info: Done.';
