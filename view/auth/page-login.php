@@ -1,6 +1,6 @@
 <div class="container flex flex-col items-center justify-center p-9 mx-auto my-2 text-3xl text-gray-900 font-extrabold">Procedi con il Login</div>
 <!--form class="flex lg:px-60 px-8 pt-24 pb-28 mb-4 bg-gray-900 text-gray-100" action="index.php?goto=auth" method="post"-->
-<form class="container flex flex-col items-center px-8 py-12 mb-4 bg-gray-900 text-gray-100" action="index.php?goto=auth" method="post">
+<form class="flex flex-col items-center px-8 py-12 mb-4 bg-gray-900 text-gray-100" action="index.php?goto=auth" method="post">
   <div class="m-6">
     <label class="block text-gray-100 font-bold mb-2" for="username">
       Username
@@ -32,8 +32,8 @@
     >
       Login
     </button>
-    <!--a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#">
-      Forgot Password?
-    </a-->
+  </div>
+  <div class="<?php if(!isset($_GET["badlogin"])) echo 'hidden'; ?> inline-block bg-red-900 rounded px-6 py-3 align-baseline font-bold text-sm text-2xl text-red-400" href="#">
+      Login fallito, riprova.
   </div>
 </form>

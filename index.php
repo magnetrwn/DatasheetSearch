@@ -47,21 +47,22 @@ switch($goto) {
             session_destroy();
             redirect_js("index.php?goto=homepage");
         }
-        else
-            include("view/auth/page-login.html");
+        else {
+            include("view/auth/page-login.php");
+        }
         break;
 
     case "auth":
         // Tentativo autenticazione successivo al login
         include_once("model/util-js.php");
         include_once("model/auth-login.php");
-        if(mysql_user_login($_POST["username"], $_POST["password"])) 
+        if(mysql_user_login($_POST["username"], $_POST["password"]))  {
             // Login successo
             redirect_js("index.php?goto=homepage");
+        }
         else
             // Login fallito, torna alla pagina login
-            // TODO: manca il messaggio "credenziali errate"
-            redirect_js("index.php?goto=login");
+            redirect_js("index.php?goto=login&badlogin");
         break;
 
     default:
