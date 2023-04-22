@@ -16,7 +16,7 @@
     </a>
       </li>
       <li class="font-semibold text-gray-700">
-		<a href="#">Register</a>
+		<a href="index.php?goto=register">Register</a>
       </li>
       <li>
         <a href="#">

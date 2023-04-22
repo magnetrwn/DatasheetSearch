@@ -1,7 +1,8 @@
 <?php
-  // Implementazione salted md5 (salt vs. Rainbow tables, ma md5 rimane comunque vulnerabile)
-
   include_once("model/mgmt-db-conn.php");
+
+  // Implementazione salted md5 (salt vs. Rainbow tables, ma md5 rimane comunque vulnerabile)
+  
   function mysql_user_login($plainusr, $plainpwd) {
     $conn = open_mysql_conn();
 
@@ -24,5 +25,28 @@
     }
     else
       return false;
+  }
+
+  function mysql_user_register($plainusr, $plainmail, $plainpwd) {
+    $conn = open_mysql_conn();
+
+    // Caratteri speciali tradotti (con htmlspecialchars vs. PHP Code Injection)
+    $cleanusr = htmlspecialchars($plainusr, ENT_COMPAT, "ISO-8859-1", true);
+    $cleanmail = filter_var($plainmail, FILTER_SANITIZE_EMAIL);
+
+    // Controlla se la mail è valida
+    if(!filter_var($cleanmail, FILTER_VALIDATE_EMAIL))
+      return false;
+
+    // Generazione salt e md5 pass+salt
+    // TODO: il salt usa solo caratteri esadecimali per ora
+    $usrsalt = bin2hex(openssl_random_pseudo_bytes(16));
+    $md5saltedpwd = md5($plainpwd.$usrsalt);
+
+    // Registra il nuovo utente
+    $regstate = mysqli_query($conn, "INSERT INTO utente VALUES ('$cleanusr', '$cleanmail', '$md5saltedpwd', '$usrsalt', 0);");
+    close_mysql_conn($conn);
+
+    return $regstate;
   }
 ?>

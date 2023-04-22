@@ -33,7 +33,7 @@
       Login
     </button>
   </div>
-  <div class="<?php if(!isset($_GET["badlogin"])) echo 'hidden'; ?> inline-block bg-red-900 rounded px-6 py-3 align-baseline font-bold text-sm text-2xl text-red-400" href="#">
+  <div class="<?php if(!isset($_GET["badlogin"])) echo 'hidden'; ?> inline-block bg-red-900 rounded px-6 py-3 align-baseline font-bold text-sm text-2xl text-red-400">
       Login fallito, riprova.
   </div>
 </form>

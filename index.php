@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="icon" type="image/png" href="/static/img/favicon.png">
 </head>
 <body class="flex flex-col min-h-screen">
 	
@@ -34,7 +35,7 @@ switch($goto) {
         $welcome = "Benvenuto su Datasheet Search!";
         if(isset($_SESSION["user"]))
             // Mostra username se loggato
-            $welcome = "Bentornato, ".$_SESSION["user"]."!";
+            $welcome = "Bentornato, ".$_SESSION["user"].".";
         include("view/page-homepage.php");
         break;
 
@@ -53,18 +54,43 @@ switch($goto) {
         break;
 
     case "auth":
-        // Tentativo autenticazione successivo al login
+        // Autenticazione successiva al login/register
         include_once("model/util-js.php");
-        include_once("model/auth-login.php");
-        if(mysql_user_login($_POST["username"], $_POST["password"]))  {
-            // Login successo
-            redirect_js("index.php?goto=homepage");
+        include_once("model/mgmt-auth.php");
+        if(isset($_GET["newuser"])) {
+            // Passa al processore register
+            if(mysql_user_register($_POST["username"], $_POST["email"], $_POST["password"]))  {
+                // Register successo
+                redirect_js("index.php?goto=homepage");
+            }
+            else
+                // Register fallito, torna alla pagina register
+                redirect_js("index.php?goto=register&badregister");
         }
-        else
-            // Login fallito, torna alla pagina login
-            redirect_js("index.php?goto=login&badlogin");
+        else {
+            // Passa al processore login
+            if(mysql_user_login($_POST["username"], $_POST["password"]))  {
+                // Login successo
+                redirect_js("index.php?goto=homepage");
+            }
+            else
+                // Login fallito, torna alla pagina login
+                redirect_js("index.php?goto=login&badlogin");
+        }
         break;
 
+    case "register":
+        // Pagina di registrazione
+        include_once("model/util-js.php");
+        if(isset($_SESSION["user"])) {
+            // Se già loggato, torna alla homepage
+            redirect_js("index.php?goto=homepage");
+        }
+        else {
+            include("view/auth/page-register.php");
+        }
+        break;
+    
     default:
         // Pagina non implementata
         http_response_code(404); // non funziona?
