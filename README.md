@@ -1,4 +1,6 @@
 # Datasheet Search
+<img src='static/img/login-screen.png'>
+
 Datasheet Search è un'applicazione web sviluppata per l'anno V 2022/2023. Seguendo il pattern MVC (Model View Controller), la web app finale è in grado di:
 + Comporre pagine dinamicamente partendo da controller (`index.php`, `ajax.php`)
 + Permettere agli utilizzatori di registrarsi come utenti, con verifiche sulla preesistenza di nomi utente, indirizzi mail e della qualità delle password inserite
@@ -54,3 +56,7 @@ La web app utilizza procedure standard per la sicurezza, tra cui:
 + SQL Injection: `mysqli_real_escape_string()`
 
 Al completamento della web app sarà possibile procedere con un penetration test per cercare di trovare vulnerabilità.
+
+### AJAX
+La web app implementa un controller lato server per le richieste AJAX (`ajax.php`) che è in grado di contattare altre procedure internamente (`model/ajax`). 
+Dal lato client nelle pagine in cui AJAX viene utilizzato sono inclusi gli script (`view/ajax`) che forniscono le funzionalità richieste tramite `XMLHttpRequest()`.

@@ -1,7 +1,6 @@
-// Funzioni per il controllo dinamico lato client dei valori di username ed email già in uso
-// "view/auth/util-valid-interactive.js" deve essere incluso!
+// Le richieste "exists" sono utilizzate dal modulo di registrazione
 
-// Trasformato in funzione generica per risparmiare spazio
+// "view/auth/util-valid-interactive.js" deve essere incluso!
 function ajaxExists(toVerify, elementId, UrlPrefix, positiveMsg, negativeMsg) {
 	if(!toVerify) {
     document.getElementById(elementId).innerHTML = "..."

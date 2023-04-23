@@ -1,83 +1,94 @@
-const tabBaseClass = document.getElementById("usercheck").className
-const buttonBaseClass = document.getElementById("register").className
+const tabBaseClass = document.getElementById("usercheck").className;
+const buttonBaseClass = document.getElementById("register").className;
 
-function tabSetColor(elementId, color="none") {
-  if(!color || color == "none")
-    document.getElementById(elementId).className = tabBaseClass
+function tabSetColor(elementId, color = "none") {
+  if (!color || color == "none")
+    document.getElementById(elementId).className = tabBaseClass;
   else
-    document.getElementById(elementId).className = tabBaseClass + " bg-" + color + "-900 text-" + color + "-400"
+    document.getElementById(elementId).className =
+      tabBaseClass + " bg-" + color + "-900 text-" + color + "-400";
 }
 
 function enableNext(currentId) {
-	if(currentId == "usercheck")
-		document.getElementById("email").disabled = false
-	else if(currentId == "mailcheck")
-		document.getElementById("password").disabled = false
-	else if(currentId == "pwdcheck") {
-		document.getElementById("register").disabled = false
-    document.getElementById("register").className = buttonBaseClass + " outline outline-offset-2 outline-green-600 cursor-not-allowed"
+  if (currentId == "usercheck")
+    document.getElementById("email").disabled = false;
+  else if (currentId == "mailcheck")
+    document.getElementById("password").disabled = false;
+  else if (currentId == "pwdcheck") {
+    document.getElementById("register").disabled = false;
+    document.getElementById("register").className =
+      buttonBaseClass +
+      " outline outline-offset-2 outline-green-600 cursor-not-allowed";
   }
 }
 
 function disableAllNext(currentId) {
-	if(currentId == "usercheck")
-		document.getElementById("email").disabled = true
-	if(currentId == "usercheck" || currentId == "mailcheck")
-		document.getElementById("password").disabled = true
-	if(currentId == "usercheck" || currentId == "mailcheck" || currentId == "pwdcheck") {
-		document.getElementById("register").disabled = true
-    document.getElementById("register").className = buttonBaseClass + " outline outline-offset-2 outline-red-600 cursor-not-allowed"
+  if (currentId == "usercheck")
+    document.getElementById("email").disabled = true;
+  if (currentId == "usercheck" || currentId == "mailcheck")
+    document.getElementById("password").disabled = true;
+  if (
+    currentId == "usercheck" ||
+    currentId == "mailcheck" ||
+    currentId == "pwdcheck"
+  ) {
+    document.getElementById("register").disabled = true;
+    document.getElementById("register").className =
+      buttonBaseClass +
+      " outline outline-offset-2 outline-red-600 cursor-not-allowed";
   }
 }
 
 function mailValid(email) {
-	if(!email) {
-    document.getElementById("mailcheck").innerHTML = "..."
-		tabSetColor("mailcheck", "none")
-		disableAllNext("mailcheck")
-		return
+  if (!email) {
+    document.getElementById("mailcheck").innerHTML = "...";
+    tabSetColor("mailcheck", "none");
+    disableAllNext("mailcheck");
+    return;
   }
-	const mailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
-	if(email.match(mailRegex))
-		mailExists(email)
-	else {
-		document.getElementById("mailcheck").innerHTML = "Email non valida."
-    tabSetColor("mailcheck", "red")
-		disableAllNext("mailcheck")
-	}
+  const mailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  if (email.match(mailRegex)) mailExists(email);
+  else {
+    document.getElementById("mailcheck").innerHTML = "Email non valida.";
+    tabSetColor("mailcheck", "red");
+    disableAllNext("mailcheck");
+  }
 }
 
 function passwordValid(password) {
-  if(!password) {
-    document.getElementById("pwdcheck").innerHTML = "..."
-		tabSetColor("pwdcheck", "none")
-		disableAllNext("pwdcheck")
-		return
+  if (!password) {
+    document.getElementById("pwdcheck").innerHTML = "...";
+    tabSetColor("pwdcheck", "none");
+    disableAllNext("pwdcheck");
+    return;
   }
-  const isCorrectLength = (password.length >= 6 && password.length <= 32)
-  const hasUpperCase = /[A-Z]/.test(password)
-  const hasLowerCase = /[a-z]/.test(password)
-  const hasNumbers = /\d/.test(password)
-  const hasSpecial = /\W/.test(password)
-  if(!isCorrectLength || !hasUpperCase || !hasLowerCase || !hasNumbers || !hasSpecial) {
-    tabSetColor("pwdcheck", "red")
-    disableAllNext("pwdcheck")
+  const isCorrectLength = password.length >= 6 && password.length <= 32;
+  const hasUpperCase = /[A-Z]/.test(password);
+  const hasLowerCase = /[a-z]/.test(password);
+  const hasNumbers = /\d/.test(password);
+  const hasSpecial = /\W/.test(password);
+  if (
+    !isCorrectLength ||
+    !hasUpperCase ||
+    !hasLowerCase ||
+    !hasNumbers ||
+    !hasSpecial
+  ) {
+    tabSetColor("pwdcheck", "red");
+    disableAllNext("pwdcheck");
+  } else {
+    tabSetColor("pwdcheck", "green");
+    enableNext("pwdcheck");
   }
-  else {
-    tabSetColor("pwdcheck", "green")
-    enableNext("pwdcheck")
-  }
-  if(!isCorrectLength)
-    document.getElementById("pwdcheck").innerHTML = "Lunghezza tra 6 e 32?"
-  else if(!hasUpperCase)
-    document.getElementById("pwdcheck").innerHTML = "Maiuscola?"
-  else if(!hasLowerCase)
-    document.getElementById("pwdcheck").innerHTML = "Minuscola?"
-  else if(!hasNumbers)
-    document.getElementById("pwdcheck").innerHTML = "Numero?"
-  else if(!hasSpecial)
-    document.getElementById("pwdcheck").innerHTML = "Simbolo?"
-	else
-		document.getElementById("pwdcheck").innerHTML = "Password sicura."
+  if (!isCorrectLength)
+    document.getElementById("pwdcheck").innerHTML = "Lunghezza tra 6 e 32?";
+  else if (!hasUpperCase)
+    document.getElementById("pwdcheck").innerHTML = "Maiuscola?";
+  else if (!hasLowerCase)
+    document.getElementById("pwdcheck").innerHTML = "Minuscola?";
+  else if (!hasNumbers)
+    document.getElementById("pwdcheck").innerHTML = "Numero?";
+  else if (!hasSpecial)
+    document.getElementById("pwdcheck").innerHTML = "Simbolo?";
+  else document.getElementById("pwdcheck").innerHTML = "Password sicura.";
 }
-
