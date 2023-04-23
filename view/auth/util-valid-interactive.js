@@ -10,32 +10,34 @@ function tabSetColor(elementId, color = "none") {
 }
 
 function enableNext(currentId) {
-  if (currentId == "usercheck")
-    document.getElementById("email").disabled = false;
-  else if (currentId == "mailcheck")
-    document.getElementById("password").disabled = false;
-  else if (currentId == "pwdcheck") {
-    document.getElementById("register").disabled = false;
-    document.getElementById("register").className =
-      buttonBaseClass +
-      " outline outline-offset-2 outline-green-600 cursor-not-allowed";
+  switch(currentId) {
+    case "usercheck":
+      document.getElementById("email").disabled = false;
+      break;
+    case "mailcheck":
+      document.getElementById("password").disabled = false;
+      break;
+    case "pwdcheck":
+      document.getElementById("register").disabled = false;
+      document.getElementById("register").className =
+        buttonBaseClass +
+        " outline outline-offset-2 outline-green-600";
+      break;
   }
 }
 
 function disableAllNext(currentId) {
-  if (currentId == "usercheck")
-    document.getElementById("email").disabled = true;
-  if (currentId == "usercheck" || currentId == "mailcheck")
-    document.getElementById("password").disabled = true;
-  if (
-    currentId == "usercheck" ||
-    currentId == "mailcheck" ||
-    currentId == "pwdcheck"
-  ) {
-    document.getElementById("register").disabled = true;
-    document.getElementById("register").className =
-      buttonBaseClass +
-      " outline outline-offset-2 outline-red-600 cursor-not-allowed";
+  switch(currentId) {
+    case "usercheck":
+      document.getElementById("email").disabled = true;
+    case "mailcheck":
+      document.getElementById("password").disabled = true;
+    case "pwdcheck":
+      document.getElementById("register").disabled = true;
+      document.getElementById("register").className =
+        buttonBaseClass +
+        " outline outline-offset-2 outline-red-600 cursor-not-allowed";
+      break;
   }
 }
 

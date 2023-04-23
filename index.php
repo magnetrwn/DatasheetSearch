@@ -61,10 +61,10 @@ switch($goto) {
             // Passa al processore register
             if(mysql_user_register($_POST["username"], $_POST["email"], $_POST["password"]))  {
                 // Register successo
-                redirect_js("index.php?goto=homepage");
+                redirect_js("index.php?goto=success&msg=register&btngoto=login");
             }
             else
-                // Register fallito, torna alla pagina register
+                // Register fallito (difficile), torna alla pagina register
                 redirect_js("index.php?goto=register&badregister");
         }
         else {
@@ -91,6 +91,11 @@ switch($goto) {
         }
         break;
     
+    case "success":
+        // Mostra una schermata di operazione riuscita in base a paramteri GET
+        include("view/page-success.php");
+        break;
+
     default:
         // Pagina non implementata
         http_response_code(404); // non funziona?
