@@ -1,4 +1,6 @@
 # Datasheet Search
+[![CodeFactor](https://www.codefactor.io/repository/github/magnetrwn/datasheetsearch/badge)](https://www.codefactor.io/repository/github/magnetrwn/datasheetsearch)
+
 <img src='static/img/login-screen.png'>
 
 Datasheet Search è un'applicazione web sviluppata per l'anno V 2022/2023. Seguendo il pattern MVC (Model View Controller), la web app finale è in grado di:
@@ -36,7 +38,6 @@ La base di dati include le seguenti tabelle:
     + `listino`, che descrive il nome della famiglia alla quale appartengono un gruppo di IC, solitamente con nome e specifiche simili
     + `componente`, tabella indicativa di un singolo IC
     + `datasheet`, che include i riferimenti ad ogni singolo documento, la sua versione e la sua appartenenza ad un componente (chiave primaria composta)
-    + `file`, <b style='color:red'>da rimuovere e convertire in attributo (indirizzo file o id tramite controller)</b>
 + Tabelle da associazioni molti a molti
     + `preferiti_d`, `preferiti_az`, `preferiti_p`, rispettivamente i datasheet, aziende e package preferiti dagli utenti
 
@@ -45,7 +46,9 @@ Il database presenta un anello nella sua costruzione finale, che è completato u
 ### Tailwind CSS
 Lo stile grafico utilizzato dall'intera web app si basa completamente sulle funzionalità fornite da [Tailwind CSS](https://tailwindcss.com/), che implementa lo stile degli elementi HTML tramite l'uso di classi prestabilite.
 
-Nella web app ogni pagina costruita da `index.php` contiene il tag script necessario per avviare la libreria utilizzando la sua versione JS. Lo script è collocato in `view/using/tailwindcss-script.html`. La versione finale della web app utilizzerà un metodo adeguato per inserire la libreria.
+Nella web app ogni pagina costruita da `index.php` contiene il tag script necessario per avviare la libreria utilizzando la sua versione JS PlayCDN. Lo script è collocato in `view/using/tailwindcss-script.html`. La versione finale della web app utilizzerà un metodo adeguato per inserire la libreria.
+
+Una volta terminato lo sviluppo della grafica della web app, sarebbe corretto smettere di applicare le classi di Tailwind dal suo CDN (pesante, inserisce tutte le classi e non solo quelle utilizzate), installare la versione standalone e successivamente compilare tutti i file che utilizzano Tailwind in CSS finale, in modo da avere una grafica responsive salvata localmente. Questa operazione sarebbe da effettuare una sola volta.
 
 ### Rafforzamento sicurezza
 La web app utilizza procedure standard per la sicurezza, tra cui:
@@ -54,9 +57,10 @@ La web app utilizza procedure standard per la sicurezza, tra cui:
 + PHP Code Injection: `htmlspecialchars()`, `filter_var()`
 + PHP Timing Attack: `hash_equals()`
 + SQL Injection: `mysqli_real_escape_string()`
++ (WORK IN PROGRESS) Verifica del register con una mail contenente codice di verifica, con timeout 120 minuti
 
 Al completamento della web app sarà possibile procedere con un penetration test per cercare di trovare vulnerabilità.
 
 ### AJAX
 La web app implementa un controller lato server per le richieste AJAX (`ajax.php`) che è in grado di contattare altre procedure internamente (`model/ajax`). 
-Dal lato client nelle pagine in cui AJAX viene utilizzato sono inclusi gli script (`view/ajax`) che forniscono le funzionalità richieste tramite `XMLHttpRequest()`.
+Dal lato client nelle pagine in cui AJAX viene utilizzato sono inclusi gli script (`view/ajax`) necessari che forniscono le funzionalità richieste tramite `XMLHttpRequest()`. 
