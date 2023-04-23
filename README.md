@@ -24,8 +24,9 @@ Il login degli utenti consiste in due query SELECT prima per ricevere il salt e 
 Nonostante salted MD5 sia un metodo insicuro di preservare i dati di autenticazione degli utenti, in questa web app si implementa a solo scopo didattico. Un metodo interessante oltre che più sicuro consiste nella libreria bcrypt, ampiamente utilizzata.
 
 ### Base di dati
-Il seguente è lo schema ER della base di dati allo stato più recente:
-<img src='static/img/er.png'>
+Il seguente è lo schema ER della base di dati allo stato più recente (immagine dark mode).
+
+<img src='static/img/er-tr.png'>
 
 La base di dati è stata sviluppata per l'utilizzo su MySQL/MariaDB (versione non verificata).
 
