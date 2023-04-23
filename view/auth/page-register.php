@@ -43,6 +43,7 @@
         name="password"
         type="password"
         placeholder="Enter password"
+        onkeyup="passwordValid(this.value)"
       >
       <div id="pwdcheck" class="rounded text-center px-6 py-3 mt-3 align-baseline font-bold text-sm text-2xl">
         ...
@@ -65,5 +66,9 @@
   </div>
 </div>
 <script>
-  <?php include("view/ajax/request-ajax-exists.js"); ?>
+  <?php 
+    include("view/auth/util-valid-interactive.js");
+    include("view/ajax/request-ajax-exists.js"); 
+  ?>
+  disableAllNext("usercheck")
 </script>
