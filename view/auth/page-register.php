@@ -1,7 +1,6 @@
 <div class="container flex flex-col items-center justify-center p-9 mx-auto my-2 text-3xl text-gray-900 font-extrabold">Registrazione</div>
 <div class="container flex items-center justify-center mx-auto">
-  <form class="flex lg:px-60 px-8 pt-24 pb-20 bg-gray-900 text-gray-100" action="index.php?goto=auth&newuser" method="post">
-  <!--form class="flex flex-col items-center px-8 py-12 mb-4 bg-gray-900 text-gray-100" action="index.php?goto=auth" method="post"-->
+  <form class="flex grow shrink-0 lg:px-60 px-8 pt-24 pb-20 bg-gray-900 text-gray-100" action="index.php?goto=auth&newuser" method="post">
     <div class="m-6">
       <label class="block text-gray-100 font-bold mb-2" for="username">
         Username
@@ -12,7 +11,11 @@
         name="username"
         type="text"
         placeholder="Enter username"
+        onkeyup="user_exists(this.value)"
       >
+      <div id="usercheck" class="rounded text-center px-6 py-3 mt-3 align-baseline font-bold text-sm text-2xl">
+        ...
+      </div>
     </div>
     <div class="m-6">
       <label class="block text-gray-100 font-bold mb-2" for="email">
@@ -24,7 +27,11 @@
         name="email"
         type="text"
         placeholder="Enter email"
+        onkeyup="mail_exists(this.value)"
       >
+      <div id="mailcheck" class="rounded text-center px-6 py-3 mt-3 align-baseline font-bold text-sm text-2xl">
+        ...
+      </div>
     </div>
     <div class="m-6">
       <label class="block text-gray-100 font-bold mb-2" for="password">
@@ -37,6 +44,9 @@
         type="password"
         placeholder="Enter password"
       >
+      <div id="pwdcheck" class="rounded text-center px-6 py-3 mt-3 align-baseline font-bold text-sm text-2xl">
+        ...
+      </div>
     </div>
     <div class="m-6 mt-12">
       <button
@@ -53,3 +63,6 @@
     Register fallito, riprova.
   </div>
 </div>
+<script>
+  <?php include("view/ajax/request-ajax-exists.js"); ?>
+</script>
