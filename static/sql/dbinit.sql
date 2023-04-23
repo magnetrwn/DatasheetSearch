@@ -2,10 +2,10 @@
 -- CONFIG INIZIALE --
 -- --------------- --
 
-SYSTEM echo 'Creazione del database MySQL polli';
-DROP DATABASE IF EXISTS polli;
-CREATE DATABASE polli;
-USE polli;
+SYSTEM echo 'Creazione del database MySQL ds';
+DROP DATABASE IF EXISTS ds;
+CREATE DATABASE ds;
+USE ds;
 
 -- ----------------- --
 -- CREAZIONE TABELLE --

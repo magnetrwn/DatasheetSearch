@@ -11,7 +11,7 @@
         name="username"
         type="text"
         placeholder="Enter username"
-        onkeyup="user_exists(this.value)"
+        onkeyup="userExists(this.value)"
       >
       <div id="usercheck" class="rounded text-center px-6 py-3 mt-3 align-baseline font-bold text-sm text-2xl">
         ...
@@ -27,7 +27,7 @@
         name="email"
         type="text"
         placeholder="Enter email"
-        onkeyup="mail_exists(this.value)"
+        onkeyup="mailValid(this.value)"
       >
       <div id="mailcheck" class="rounded text-center px-6 py-3 mt-3 align-baseline font-bold text-sm text-2xl">
         ...
@@ -51,6 +51,7 @@
     <div class="m-6 mt-12">
       <button
         class="px-8 py-3 font-semibold rounded bg-violet-400 text-gray-900"
+        id="register"
         type="submit"
       >
         Register
