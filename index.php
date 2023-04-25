@@ -97,6 +97,7 @@ switch($goto) {
     case "datasheet":
     //case "package":
         include_once("model/util-search.php");
+        include_once("model/util-db.php");
         include("view/search/page-results.php");
         break;
 
