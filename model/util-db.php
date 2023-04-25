@@ -9,7 +9,9 @@
     switch ($colname) {
       case "logo":
       case "icona":
-        // Immagine, non vogliamo il percorso stampato
+        // Immagine (non vogliamo il percorso stampato)
+      case "matched_in_column":
+        // Nome della colonna in cui si trova un "match" della ricerca (vedi model/util-search.php)
         return true;
     }
     return false;
