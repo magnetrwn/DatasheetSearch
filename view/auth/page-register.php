@@ -6,12 +6,13 @@
         Username
       </label>
       <input
-        class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none"
+        class="appearance-none border rounded w-full py-2 px-3 bg-gray-700 border-gray-600 placeholder-gray-400 leading-tight"
         id="username"
         name="username"
         type="text"
         placeholder="Enter username"
         onkeyup="userExists(this.value)"
+        required=""
       >
       <div id="usercheck" class="rounded text-center px-6 py-3 mt-3 align-baseline font-bold text-sm text-2xl">
         ...
@@ -22,12 +23,13 @@
         Email
       </label>
       <input
-        class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none"
+        class="appearance-none border rounded w-full py-2 px-3 bg-gray-700 border-gray-600 placeholder-gray-400 leading-tight disabled:bg-gray-900"
         id="email"
         name="email"
         type="text"
         placeholder="Enter email"
         onkeyup="mailValid(this.value)"
+        required=""
       >
       <div id="mailcheck" class="rounded text-center px-6 py-3 mt-3 align-baseline font-bold text-sm text-2xl">
         ...
@@ -38,12 +40,13 @@
         Password
       </label>
       <input
-        class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none"
+        class="appearance-none border rounded w-full py-2 px-3 bg-gray-700 border-gray-600 placeholder-gray-400 leading-tight disabled:bg-gray-900"
         id="password"
         name="password"
         type="password"
         placeholder="Enter password"
         onkeyup="passwordValid(this.value)"
+        required=""
       >
       <div id="pwdcheck" class="rounded text-center px-6 py-3 mt-3 align-baseline font-bold text-sm text-2xl">
         ...

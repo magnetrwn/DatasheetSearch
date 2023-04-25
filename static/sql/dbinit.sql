@@ -29,7 +29,8 @@ CREATE TABLE package (
 
 -- Tabelle con chiavi esterne
 
-CREATE TABLE azienda_produttrice (
+-- rinominata da "azienda_produttrice" ad "azienda"
+CREATE TABLE azienda (
   nome VARCHAR(128) PRIMARY KEY,
   link VARCHAR(128),
   logo VARCHAR(128) DEFAULT 'dynamic/no-logo.png'
@@ -38,10 +39,10 @@ CREATE TABLE azienda_produttrice (
 CREATE TABLE listino (
   famiglia VARCHAR(128) PRIMARY KEY,
   descrizione VARCHAR(128),
-  fk_azienda_produttrice_nome VARCHAR(128),
+  fk_azienda_nome VARCHAR(128),
   data DATE,
   
-  FOREIGN KEY(fk_azienda_produttrice_nome) REFERENCES azienda_produttrice(nome)
+  FOREIGN KEY(fk_azienda_nome) REFERENCES azienda(nome)
     ON UPDATE CASCADE
     ON DELETE NO ACTION
 );
@@ -86,7 +87,7 @@ CREATE TABLE datasheet (
 --     ON DELETE SET NULL
 -- );
 
--- ALTER TABLE azienda_produttrice ADD
+-- ALTER TABLE azienda ADD
 --   FOREIGN KEY(fk_file_id_file) REFERENCES file(id_file)
 --     ON UPDATE CASCADE
 --     ON DELETE NO ACTION;
@@ -109,12 +110,12 @@ CREATE TABLE preferiti_d (
 );
 
 CREATE TABLE preferiti_az (
-  fk_azienda_produttrice_nome VARCHAR(128),
+  fk_azienda_nome VARCHAR(128),
   fk_utente_username VARCHAR(32),
   
-  PRIMARY KEY(fk_azienda_produttrice_nome, fk_utente_username),
+  PRIMARY KEY(fk_azienda_nome, fk_utente_username),
   
-  FOREIGN KEY(fk_azienda_produttrice_nome) REFERENCES azienda_produttrice(nome)
+  FOREIGN KEY(fk_azienda_nome) REFERENCES azienda(nome)
     ON UPDATE CASCADE
     ON DELETE CASCADE,
   FOREIGN KEY(fk_utente_username) REFERENCES utente(username)
@@ -187,7 +188,7 @@ INSERT INTO package(alias) VALUES
   ('TSSOP'), ('UFLGA'), ('UQFN'), ('USON'), ('VFBGA'), ('VFLGA'), ('VQFN'),
   ('WFLGA'), ('WLCSP'), ('WQFN'), ('WSON'), ('XFLGA'), ('XSON'), ('ZIP');
 
-INSERT INTO azienda_produttrice(nome, link) VALUES
+INSERT INTO azienda(nome, link) VALUES
   ('STMicroelectronics', 'http://google.com'),
   ('ON Semiconductor', 'http://whatsapp.com'),
   ('Diodes Incorporated', 'https://wikipedia.org'),
@@ -239,7 +240,7 @@ INSERT INTO datasheet VALUES
 --   (DEFAULT, 'dynamic/datasheets/logo3.png', NULL, NULL, NULL),
 --   (DEFAULT, 'dynamic/datasheets/ASDFADR.gif', NULL, NULL, NULL);
 
--- UPDATE azienda_produttrice SET fk_file_id_file=600;
+-- UPDATE azienda SET fk_file_id_file=600;
 
 INSERT INTO preferiti_d VALUES
   ('IRFZ44N', 'Infineon 2012', 'admin'),

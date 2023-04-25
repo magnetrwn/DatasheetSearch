@@ -90,7 +90,20 @@ switch($goto) {
             include("view/auth/page-register.php");
         }
         break;
-    
+
+    case "azienda":
+    case "listino":
+    case "componente":  
+    case "datasheet":
+    //case "package":
+        include_once("model/util-search.php");
+        include("view/search/page-results.php");
+        break;
+
+    case "search":
+        include("view/search/page-search.php");
+        break;
+
     case "success":
         // Mostra una schermata di operazione riuscita in base a paramteri GET
         include("view/page-success.php");
