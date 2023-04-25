@@ -17,6 +17,7 @@
   </thead>
   <tbody>
     <?php
+      $table = mysql_select_all_but_internal($goto);
       if($getcols != false) {
         while($row = mysqli_fetch_assoc($table)) {
           echo "<tr class='odd:bg-gray-100'>";
