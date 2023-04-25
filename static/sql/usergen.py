@@ -3,19 +3,15 @@
 # Script per creare utenti casuali, benchmark per il login
 
 from hashlib import md5
-from random import randint
+from random import randint, randbytes
 from string import ascii_letters
 
 
-def gen_ascii_string(length, allowed=ascii_letters + "0123456789!$%&()=@#*+-_"):
+def gen_ascii_string(length, allowed=ascii_letters + "0123456789"):
     """Generate a string of specified length using only allowed ASCII characters."""
     out = ""
     for _ in range(length):
-        while True:
-            char = randint(32, 127).to_bytes(1, "big").decode("ascii")
-            if char.isalnum() or char in allowed:
-                out += char
-                break
+        out += allowed[randint(0, len(allowed)-1)]
     return out
 
 
@@ -28,14 +24,44 @@ if __name__ == "__main__":
     i = 0
     while len(list(new_usernames)) < TO_GENERATE:
         new_usernames.add(
-            gen_ascii_string(randint(5, 32), allowed=ascii_letters + "0123456789-_+")
+            gen_ascii_string(
+                randint(5, 13),
+                # Unix dictionary frequency più realistico? (https://mdickens.me/typing/letter_frequency.html)
+                allowed=
+                "e" * 26
+                + "i" * 25
+                + "a" * 24
+                + "o" * 23
+                + "r" * 22
+                + "n" * 21
+                + "t" * 20
+                + "s" * 19
+                + "l" * 18
+                + "c" * 17
+                + "u" * 16
+                + "p" * 15
+                + "m" * 14
+                + "d" * 13
+                + "h" * 12
+                + "y" * 11
+                + "g" * 10
+                + "b" * 9
+                + "f" * 8
+                + "v" * 7
+                + "k" * 6
+                + "w" * 5
+                + "z" * 4
+                + "x" * 3
+                + "q" * 2
+                + "j0123456789-_+"
+            )
         )
         i += 1
         print(f"\r  usernames: \x1B[92m{i}/{TO_GENERATE}\x1B[0m", end="")
     print()
     i = 0
     while len(list(new_usersalts)) < TO_GENERATE:
-        new_usersalts.add(gen_ascii_string(randint(8, 32)))
+        new_usersalts.add(randbytes(16).hex())
         i += 1
         print(f"\r  salts: \x1B[92m{i}/{TO_GENERATE}\x1B[0m", end="")
     print()

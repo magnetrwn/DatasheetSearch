@@ -41,6 +41,7 @@ function disableAllNext(currentId) {
   }
 }
 
+/* exported mailValid */
 function mailValid(email) {
   if (!email) {
     document.getElementById("mailcheck").innerHTML = "...";
@@ -48,7 +49,7 @@ function mailValid(email) {
     disableAllNext("mailcheck");
     return;
   }
-  const mailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  const mailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
   if (email.match(mailRegex)) mailExists(email);
   else {
     document.getElementById("mailcheck").innerHTML = "Email non valida.";
@@ -57,6 +58,7 @@ function mailValid(email) {
   }
 }
 
+/* exported passwordValid */
 function passwordValid(password) {
   if (!password) {
     document.getElementById("pwdcheck").innerHTML = "...";
