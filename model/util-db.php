@@ -1,11 +1,17 @@
 <?php
   function is_internal_colname($colname) {
-    if(strpos($colname, "fk") === 0)
+    if(strpos(substr($colname, 0, 2), "fk") === 0)
       // Chiave esterna
       return true;
-    else if($colname == "logo" || $colname == "icona")
-      // Immagine, non vogliamo stampare il percorso
+    if(strpos(substr($colname, 0, 2), "id") === 0)
+      // ID usato dal DB
       return true;
+    switch ($colname) {
+      case "logo":
+      case "icona":
+        // Immagine, non vogliamo il percorso stampato
+        return true;
+    }
     return false;
   }
 ?>
