@@ -1,5 +1,5 @@
-<div class="container flex flex-col items-center justify-center p-9 mx-auto my-2 text-3xl text-gray-900 font-extrabold">Registrazione</div>
-<div class="container flex items-center justify-center mx-auto">
+<div class="flex flex-col items-center justify-center p-9 mx-auto my-2 text-3xl text-gray-900 font-extrabold">Registrazione</div>
+<div class="flex items-center justify-center mx-auto">
   <form class="flex grow shrink-0 lg:px-60 px-8 pt-24 pb-20 bg-gray-900 text-gray-100" action="index.php?goto=auth&newuser" method="post">
     <div class="m-6">
       <label class="block text-gray-100 font-bold mb-2" for="username">

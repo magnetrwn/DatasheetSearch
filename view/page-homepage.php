@@ -1,4 +1,4 @@
-<div class="container flex flex-col items-center justify-center p-11 mx-auto my-2 text-3xl text-gray-100 bg-gray-900 font-extrabold">
+<div class="flex flex-col items-center justify-center p-11 mx-auto my-2 text-3xl text-gray-100 bg-gray-900 font-extrabold">
     <?php 
         echo $welcome;
         include("view/search/page-search.php"); 
