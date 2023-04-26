@@ -12,11 +12,12 @@
 session_name("dssessionid");
 // Generiamo un ID di sessione di 64 byte: i primi 32 sono hash dell'IP remoto, e gli ultimi 32 sono casuali
 // TODO: sistema protezione dal furto del session id (impedire che un IP remoto diverso si connetta all'utente già loggato usando stesso session id)
-$sessfromip = md5(strtr($_SERVER['REMOTE_ADDR'], ".:/", " ")) . bin2hex(openssl_random_pseudo_bytes(16));
-var_dump($sessfromip);
-session_id($sessfromip);
-session_start();
-//session_regenerate_id();
+if(!isset($_COOKIE["dssessionid"])) {
+    $sessfromip = md5(strtr($_SERVER['REMOTE_ADDR'], ".:/", "=")) 
+                  .bin2hex(openssl_random_pseudo_bytes(16));
+    session_id($sessfromip);
+    session_start();
+}
 $loginlabel = "Login";
 if(isset($_SESSION["user"]))
     $loginlabel = "Logout";
