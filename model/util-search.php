@@ -29,19 +29,25 @@
       return null;
   }
 
-  define("STARTS_WITH", 1234);
-  define("ENDS_WITH", 2345);
-  define("CONTAINS", 3456);
+  // Valori per $mode di mysql_select_like()
+  define("EXACT_MATCH", 0);
+  define("STARTS_WITH", 1);
+  define("ENDS_WITH", 2);
+  define("CONTAINS", 3);
 
-  // TODO: case insensitive
-  function mysql_select_like($table, $mode /* STARTS_WITH, ENDS_WITH, CONTAINS */, $string) {
+  // Valori per $casemode di mysql_select_like()
+  define("CASE_SENSITIVE", false);
+  define("CASE_IGNORE", true);
+
+  function mysql_select_all_like($string, $table, $mode=EXACT_MATCH, $casemode=CASE_SENSITIVE) {
     // Ricerca in tutte le colonne, basata sulla keyword LIKE di MySQL
     include_once("model/mgmt-db-conn.php");
     $conn = open_mysql_conn();
 
     $cleantable = mysqli_real_escape_string($conn, $table);
     $cleanstring = htmlspecialchars(mysqli_real_escape_string($conn, $string), ENT_COMPAT, "ISO-8859-1", true);
-    
+    if($casemode) $cleanstring = strtolower($cleanstring);
+
     // Seleziona tutte le colonne non nascoste
     $selectall = mysqli_fetch_assoc(mysql_select_all_query($table));
 
@@ -51,10 +57,24 @@
 
       if($bigquery != "")
         $bigquery .= "UNION ";
-      $bigquery .= "SELECT *, '$colname' AS matched_in_column FROM $cleantable WHERE $colname LIKE '";
-      if($mode == STARTS_WITH)    $bigquery .= "$cleanstring%";
-      else if($mode == ENDS_WITH) $bigquery .= "%$cleanstring";
-      else if($mode == CONTAINS)  $bigquery .= "%$cleanstring%";
+      $bigquery .= "SELECT *, '$colname' AS matched_in_column FROM $cleantable WHERE ";
+      if($casemode) $bigquery .= "LOWER($colname)";
+      else          $bigquery .= $colname;
+      $bigquery .= " LIKE '";
+      switch($mode) {
+        case EXACT_MATCH:
+          $bigquery .= "$cleanstring";
+          break;
+        case STARTS_WITH:
+          $bigquery .= "$cleanstring%";
+          break;
+        case ENDS_WITH:
+          $bigquery .= "%$cleanstring";
+          break;
+        case CONTAINS:
+          $bigquery .= "%$cleanstring%";
+          break;
+      }
       $bigquery .= "' ";
     }
     $bigquery .= ";";
