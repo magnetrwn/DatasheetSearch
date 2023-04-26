@@ -2,7 +2,7 @@
 	function open_mysql_conn(){
 		$servername = "127.0.0.1";
 		$username = "root";
-		$password = "polli_mysql";
+		$password = "dbrootuser%k";
 		$dbname = "ds";
 
 		$conn = mysqli_connect($servername, $username, $password, $dbname);
