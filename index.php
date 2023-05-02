@@ -11,11 +11,25 @@
         delete_dssessionid();
     create_dssessionid();
     session_start();
+
+      ///////////////////
+    //                   //
+    // Init (pre-header) //
+    //                   //
+      ///////////////////
+
+    if(!isset($_GET["goto"]))
+        // Se non viene richiesta pagina, va alla homepage
+        $goto = "homepage";
+    else
+        // Traduce richieste in minuscolo e senza caratteri speciali pericolosi
+        $goto = htmlspecialchars(strtolower($_GET["goto"]), ENT_COMPAT, "ISO-8859-1", true);
 ?>
 <!DOCTYPE html>
 <html>
 <head>
     <link rel="icon" type="image/png" href="/static/img/favicon.png">
+    <title>Datasheet Search - <?php echo strtoupper(substr($goto, 0, 1)).substr($goto, 1); ?></title>
 </head>
 <body class="flex flex-col min-h-screen">
 <div>
@@ -25,19 +39,13 @@
     // Costruzione pagina //
     //                    //
       ////////////////////
-
+    
     $loginlabel = "Login";
     if(isset($_SESSION["user"]))
         // Imposta logout invece di login
         $loginlabel = "Logout";
-    include("view/page-top.php");
 
-    if(!isset($_GET["goto"]))
-        // Se non viene richiesta pagina, va alla homepage
-        $goto = "homepage";
-    else
-        // Traduce richieste in minuscolo
-        $goto = strtolower($_GET["goto"]);
+    include("view/page-top.php");
 
     switch($goto) {
 

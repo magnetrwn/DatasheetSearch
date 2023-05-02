@@ -19,6 +19,8 @@
     function check_dssessionid() {
         // vs. Session Hijacking (è ancora possibile, non ci sono ancora controlli CSRF)
         //return (md5(strtr($_SERVER['REMOTE_ADDR'], ".:/", "=")) === substr(session_id(), 0, 32)); // non funziona con session_id?
+        if(!isset($_COOKIE[DSSNAME]))
+            return false;
         return (md5(strtr($_SERVER['REMOTE_ADDR'], ".:/", "=")) === substr($_COOKIE[DSSNAME], 0, 32));
     }
 
