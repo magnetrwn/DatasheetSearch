@@ -1,4 +1,4 @@
-<div class="container flex flex-col items-center justify-center p-9 mx-auto my-2 text-3xl text-gray-900 font-extrabold">Procedi con il Login</div>
+<h2 class="flex flex-col items-center justify-center p-9 mx-auto my-2 text-3xl text-gray-900 font-extrabold">Procedi con il Login</h2>
 <!--form class="flex lg:px-60 px-8 pt-24 pb-28 mb-4 bg-gray-900 text-gray-100" action="index.php?goto=auth" method="post"-->
 <form class="flex flex-col items-center px-8 py-12 mb-4 bg-gray-900 text-gray-100" action="index.php?goto=auth" method="post">
   <div class="m-6">

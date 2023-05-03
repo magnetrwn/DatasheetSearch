@@ -4,11 +4,12 @@
 	  <a href="index.php?goto=homepage">Datasheet Search</a>
   </h1>
   <div class="flex items-center">
-    <div class="flex items-center">
+    <!-- ricerca veloce rimossa per ora, potrebbe essere interessante per attivare la ricerca da una pagina qualsiasi -->
+    <!--div class="flex items-center">
       <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 pt-0.5 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
       </svg>
-      <input class="ml-2 outline-none bg-transparent" type="text" name="search" id="search" placeholder="Cerca ovunque..." />
+      <input class="ml-2 outline-none bg-transparent" type="text" name="search" id="search" placeholder="Cerca ovunque..." /-->
     <ul class="flex items-center space-x-6">
       <li class="font-semibold text-gray-700">
 		<a href="index.php?goto=login">

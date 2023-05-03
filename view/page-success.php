@@ -1,5 +1,5 @@
 <section class="flex items-center h-full py-24 bg-gray-900 text-gray-100">
-	<div class="container flex flex-col items-center justify-center px-5 mx-auto my-8">
+	<div class="flex flex-col items-center justify-center px-5 mx-auto my-8">
 		<div class="max-w-xl text-center">
 			<h2 class="mb-4 font-extrabold text-2xl text-gray-400">
 				<?php 

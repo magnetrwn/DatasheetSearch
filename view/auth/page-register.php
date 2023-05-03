@@ -1,4 +1,4 @@
-<div class="flex flex-col items-center justify-center p-9 mx-auto my-2 text-3xl text-gray-900 font-extrabold">Registrazione</div>
+<h2 class="flex flex-col items-center justify-center p-9 mx-auto my-2 text-3xl text-gray-900 font-extrabold">Registrazione</h2>
 <div class="flex items-center justify-center bg-gray-900 mx-auto">
   <form class="flex shrink lg:px-60 px-8 pt-24 pb-20 bg-gray-900 text-gray-100 mx-auto" action="index.php?goto=auth&newuser" method="post">
     <div class="m-6">
@@ -63,7 +63,7 @@
     </div>
   </form>
 </div>
-<div class="<?php if(!isset($_GET["badregister"])) echo 'hidden'; ?> bg-gray-900 container flex flex-col items-center justify-center mx-auto pb-4">
+<div class="<?php if(!isset($_GET["badregister"])) echo 'hidden'; ?> bg-gray-900 flex flex-col items-center justify-center mx-auto pb-4">
   <div class="inline-block bg-red-900 rounded px-6 py-3 align-baseline font-bold text-sm text-2xl text-red-400">
     Register fallito, riprova.
   </div>
