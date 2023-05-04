@@ -1,7 +1,7 @@
 # Datasheet Search
 [![CodeFactor](https://www.codefactor.io/repository/github/magnetrwn/datasheetsearch/badge)](https://www.codefactor.io/repository/github/magnetrwn/datasheetsearch)
 
-<img src='static/img/login-screen.png'>
+<img src='static/img/main-screen.png'>
 
 Datasheet Search è un'applicazione web sviluppata per l'anno V 2022/2023. Seguendo il pattern MVC (Model View Controller), la web app finale è in grado di:
 + Comporre pagine dinamicamente partendo da controller (`index.php`, `ajax.php`)
@@ -14,6 +14,8 @@ Datasheet Search è un'applicazione web sviluppata per l'anno V 2022/2023. Segue
 + ... WORK IN PROGRESS ...
 
 Il concetto base della web app è di <u>fornire informazioni relative a componenti elettronici in modo rapido tramite una barra di ricerca ed un raccoglimento dei risultati ben definito.</u> La funzionalità di ricerca potrebbe richiedere l'implementazione di uno stemmer e dell'algoritmo di TF-IDF.
+
+Gran parte del design è di creazione personale, ma con alcuni spunti da tutorial ed esempi per creare una buona UI grafica.
 
 ### Autenticazione
 Gli utenti sono salvati in un database come una tupla di:
@@ -73,6 +75,9 @@ Lo stile grafico utilizzato dall'intera web app si basa completamente sulle funz
 Nella web app ogni pagina costruita da `index.php` contiene il tag script necessario per avviare la libreria utilizzando la sua versione JS PlayCDN. Lo script è collocato in `view/using/tailwindcss-script.html`. La versione finale della web app utilizzerà un metodo adeguato per inserire la libreria.
 
 Una volta terminato lo sviluppo della grafica della web app, sarebbe corretto smettere di applicare le classi di Tailwind dal suo CDN (pesante, inserisce tutte le classi e non solo quelle utilizzate), installare la versione standalone e successivamente compilare tutti i file che utilizzano Tailwind in CSS finale, in modo da avere una grafica responsive salvata localmente. Questa operazione sarebbe da effettuare una sola volta.
+
+### MingCute
+Le icone utilizzate sono in buona parte prese dalla collezione open-source di icone [MingCute](https://www.mingcute.com/).
 
 ### Security
 La web app utilizza procedure standard per la sicurezza, tra cui:

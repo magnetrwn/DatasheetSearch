@@ -1,3 +1,4 @@
+// si potrebbe modificare usando classList invece di className, che e piu versatile
 const tabBaseClass = document.getElementById("usercheck").className;
 const buttonBaseClass = document.getElementById("register").className;
 
