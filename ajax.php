@@ -9,4 +9,6 @@
 
   if(isset($_GET["mlchk"]))
     include("model/ajax/handler-ajax-exists.php");
+
+  // TODO: infinite scrolling
 ?>
