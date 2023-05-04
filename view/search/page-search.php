@@ -6,9 +6,9 @@
 </div>
 <?php
     // TODO: lavorando sull'elaboratore dei risultati... questi sono ad esempio
-    include("view/search/page-result-block.php");
-    include("view/search/page-result-block.php");
-    include("view/search/page-result-block.php");
-    include("view/search/page-result-block.php");
-    include("view/search/page-result-block.php");
+    include("view/search/page-search-block.php");
+    include("view/search/page-search-block.php");
+    include("view/search/page-search-block.php");
+    include("view/search/page-search-block.php");
+    include("view/search/page-search-block.php");
 ?>

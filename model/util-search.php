@@ -54,7 +54,6 @@
     // Creiamo la query per cercare in tutte le colonne, e memorizziamo anche in che colonna si trovano i "match"
     $bigquery = "";
     foreach($selectall as $colname => $_) {
-
       if($bigquery != "")
         $bigquery .= "UNION ";
       $bigquery .= "SELECT *, '$colname' AS matched_in_column FROM $cleantable WHERE ";

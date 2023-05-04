@@ -20,7 +20,7 @@
       $table = mysql_select_all_but_internal($goto);
       if($getcols != false) {
         while($row = mysqli_fetch_assoc($table)) {
-          echo "<tr class='odd:bg-gray-100'>";
+          echo "<tr class='odd:bg-gray-200'>";
           foreach($row as $colname => $column) {
             $cleancolumn = htmlspecialchars($column, ENT_COMPAT, "ISO-8859-1", true);
             if(is_hypertext_link($column))

@@ -114,9 +114,21 @@
         case "datasheet":
         case "package":
             // La view autolist costruisce tabelle di visualizzazione usando il $goto, quindi solo queste tabelle
-            include_once("model/util-search.php");
-            include_once("model/util-db.php");
-            include("view/search/page-autolist.php");
+            include_once("model/util-js.php");
+            if(!isset($_SESSION["user"])) {
+                // Se non è loggato, mostra la pagina di login
+                unset($_SESSION);
+                session_destroy();
+                redirect_js("index.php?goto=login");
+            }
+            else {
+                // Genera una tabella UI contenente la tabella del DB
+                include_once("model/util-search.php");
+                include_once("model/util-db.php");
+                include("view/search/page-autolist.php");
+                // TODO: manca ancora la modifica ed eliminazione da parte dell'utente admin
+                //if($_SESSION["user"] === "admin")
+            }
             break;
 
         case "search":
