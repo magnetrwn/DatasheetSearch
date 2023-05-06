@@ -6,14 +6,14 @@
 
     function create_dssessionid() {
         session_name(DSSNAME);
-        // Attiviamo httpOnly, per prevenire accesso via JS
-        session_set_cookie_params(DSSEXPIRE, "/", "", false, true);
         // Generiamo un ID di sessione di 64 byte: i primi 32 sono hash dell'IP remoto, e gli ultimi 32 sono casuali
         if(!isset($_COOKIE[DSSNAME])) {
             $sessfromip = md5(strtr($_SERVER['REMOTE_ADDR'], ".:/", "=")) 
                         .bin2hex(openssl_random_pseudo_bytes(16));
             session_id($sessfromip);
         }  
+        // httpOnly=true (JS stop lettura) e sameSite=Lax (cross origin stop)
+        session_set_cookie_params(DSSEXPIRE, "/; samesite=Lax", "", false, true);
     }
 
     function check_dssessionid() {

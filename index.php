@@ -78,21 +78,25 @@
             include_once("model/mgmt-auth.php");
             if(isset($_GET["newuser"])) {
                 // Passa al processore register
-                if(mysql_user_register($_POST["username"], $_POST["email"], $_POST["password"]))
-                    // Register successo
-                    redirect_js("index.php?goto=success&msg=register&btngoto=login");
-                else
-                    // Register fallito (probabile attacker/bot), torna alla pagina register
-                    redirect_js("index.php?goto=register&badregister");
+                if(isset($_POST["username"]) && isset($_POST["email"]) && isset($_POST["password"]))
+                    if(mysql_user_register($_POST["username"], $_POST["email"], $_POST["password"])) {
+                        // Register successo
+                        redirect_js("index.php?goto=success&msg=register&btngoto=login");
+                        break;
+                    }
+                // Register fallito (probabile attacker/bot), torna alla pagina register
+                redirect_js("index.php?goto=register&badregister");
             }
             else {
                 // Passa al processore login
-                if(mysql_user_login($_POST["username"], $_POST["password"]))
-                    // Login successo
-                    redirect_js("index.php?goto=homepage");
-                else
-                    // Login fallito, torna alla pagina login
-                    redirect_js("index.php?goto=login&badlogin");
+                if(isset($_POST["username"]) && isset($_POST["password"]))
+                    if(mysql_user_login($_POST["username"], $_POST["password"])) {
+                        // Login successo
+                        redirect_js("index.php?goto=homepage");
+                        break;
+                    }
+                // Login fallito, torna alla pagina login
+                redirect_js("index.php?goto=login&badlogin");
             }
             break;
 
@@ -178,7 +182,7 @@
 
         default:
             // Pagina non implementata
-            http_response_code(404); // non funziona?
+            //http_response_code(404);
             include("view/page-404.html");
             break;
     }

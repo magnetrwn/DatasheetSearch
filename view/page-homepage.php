@@ -26,7 +26,7 @@
 </div>
 <div id="home-tc3" class="tab-content hidden py-2">
     <h2 class="text-gray-600 text-2xl lg:text-3xl mt-4 lg:m-6">Implementazione fisica</h2>
-    <a class="text-blue-600 font-extrabold" href="static/sql/dbinit.sql">Scarica il file SQL di inizializzazione del DB!</a>
+    <a class="text-blue-600 font-extrabold" href="static/dbres/dbinit.sql">Scarica il file SQL di inizializzazione del DB!</a>
 </div>
 <script>
     <?php include_once("util-tabs.js"); ?>

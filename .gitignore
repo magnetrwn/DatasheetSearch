@@ -1,2 +1,4 @@
-# Output from usergen.py
-static/sql/usergen-out.sql
+# Output di usergen.py
+static/dbres/usergen-out.sql
+# Output di changepwd.py
+static/dbres/changepwd-out.sql
