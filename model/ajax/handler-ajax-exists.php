@@ -12,8 +12,14 @@
   }
 
   if(isset($_GET["usrchk"]))
-    echo ajax_column_exists("username", $_GET["usrchk"]);
+    if(ajax_column_exists("username", $_GET["usrchk"]))
+      echo "true";
+    else
+      echo "false";
 
   if(isset($_GET["mlchk"]))
-    echo ajax_column_exists("email", $_GET["mlchk"]);
+    if(ajax_column_exists("email", $_GET["mlchk"]))
+      echo "true";
+    else
+      echo "false";
 ?>

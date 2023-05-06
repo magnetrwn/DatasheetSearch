@@ -112,7 +112,7 @@
         case "listino":
         case "componente":  
         case "datasheet":
-        case "package":
+        case "package": // no icona
             // La view autolist costruisce tabelle di visualizzazione usando il $goto, quindi solo queste tabelle
             include_once("model/util-js.php");
             if(!isset($_SESSION["user"])) {
@@ -132,7 +132,43 @@
             break;
 
         case "search":
-            include("view/search/page-search.php");
+            // Pagina risultati ricerca
+            include_once("model/util-js.php");
+            if(!isset($_POST["search-type"]) || !isset($_POST["for"]))
+                redirect_js("index.php?goto=homepage");
+            else {
+                include_once("model/util-search.php");
+                include_once("model/mgmt-db-conn.php");
+                include("view/search/page-search.php");
+                // Sanitize avviene nel model
+                switch($_POST["search-type"]) {
+                    case "componente":
+                        $searchresults = mysql_select_all_like($_POST["for"], $_POST["search-type"], CONTAINS, CASE_IGNORE);
+                        while($searchrow = mysqli_fetch_assoc($searchresults)) {
+                            // $logo = ???
+                            $title = strstr($searchrow["alias"], ",", true);
+                            if(strlen($title) == 0)
+                                $title = $searchrow["alias"];
+                            $subtitle = $searchrow["descrizione"];
+                            $alttitle = $searchrow["stato_produzione"];
+                            $cid = $searchrow["id_componente"];
+                            $conn = open_mysql_conn();
+                            $links = mysqli_query($conn, "SELECT * FROM datasheet WHERE fk_componente_id_componente='$cid';");
+                            close_mysql_conn($conn);
+                            include("view/search/page-search-block.php");
+                        }
+                        break;
+                    case "listino":
+                        break;
+                    default:
+                        redirect_js("index.php?goto=homepage");
+                        break;
+                }
+            }
+            break;
+
+        case "details":
+            // TODO: pagina nel dettaglio su una colonna (solo datasheet?)
             break;
 
         case "success":
@@ -149,13 +185,14 @@
 ?>
 </div>
 <?php
+    include("view/page-bottom.html");
+    
       ////////////
     //            //
     //   Script   //
     //            //
       ////////////
 
-    include("view/page-bottom.html"); // anche il footer qui
     include_once("view/using/tailwindcss-script.html");
 ?>
 </body>

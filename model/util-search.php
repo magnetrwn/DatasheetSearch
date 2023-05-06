@@ -48,7 +48,6 @@
     $cleanstring = htmlspecialchars(mysqli_real_escape_string($conn, $string), ENT_COMPAT, "ISO-8859-1", true);
     if($casemode) $cleanstring = strtolower($cleanstring);
 
-    // Seleziona tutte le colonne non nascoste
     $selectall = mysqli_fetch_assoc(mysql_select_all_query($table));
 
     // Creiamo la query per cercare in tutte le colonne, e memorizziamo anche in che colonna si trovano i "match"
