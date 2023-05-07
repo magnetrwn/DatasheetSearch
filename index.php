@@ -24,16 +24,7 @@
     else
         // Traduce richieste in minuscolo e senza caratteri speciali pericolosi
         $goto = htmlspecialchars(strtolower($_GET["goto"]), ENT_COMPAT, "ISO-8859-1", true);
-?>
-<!DOCTYPE html>
-<html>
-<head>
-    <link rel="icon" type="image/png" href="/static/img/favicon.png">
-    <title>Datasheet Search - <?php echo strtoupper(substr($goto, 0, 1)).substr($goto, 1); ?></title>
-</head>
-<body class="flex flex-col min-h-screen">
-<div>
-<?php
+
       ////////////////////
     //                    //
     // Costruzione pagina //
@@ -45,9 +36,33 @@
         // Imposta logout invece di login
         $loginlabel = "Logout";
 
-    include("view/page-top.php");
+    switch($goto) {
+        // Costruzione pagina, head e top
+        case "homepage":
+        case "login":
+        case "auth":
+        case "register":
+        case "azienda":
+        case "listino":
+        case "componente":  
+        case "datasheet":
+        case "package":
+        case "search":
+        case "details":
+        case "success":
+            // 200
+            include("view/page-html-200.php");
+            include("view/page-top.php");
+            break;
+        default:
+            // 404
+            include("view/page-html-404.php");
+            include("view/page-top.php");
+            break;
+    }
 
     switch($goto) {
+        // Costruzione pagina effettiva
 
         case "homepage":
             // Pagina home
@@ -182,13 +197,11 @@
 
         default:
             // Pagina non implementata
-            //http_response_code(404);
             include("view/page-404.html");
             break;
     }
-?>
-</div>
-<?php
+
+    echo "</div>"; // terminazione del div iniziato in page-html-200/404
     include("view/page-bottom.html");
     
       ////////////
