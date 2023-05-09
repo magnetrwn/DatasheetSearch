@@ -1,7 +1,7 @@
 # Datasheet Search
 [![CodeFactor](https://www.codefactor.io/repository/github/magnetrwn/datasheetsearch/badge)](https://www.codefactor.io/repository/github/magnetrwn/datasheetsearch)
 
-<img src='static/img/main-screen.png'>
+<img src='static/other/main-screen.png'>
 
 Datasheet Search è un'applicazione web sviluppata per l'anno V 2022/2023. Seguendo il pattern MVC (Model View Controller), la web app finale è in grado di:
 + Comporre pagine dinamicamente partendo da controller (`index.php`, `ajax.php`)
@@ -53,7 +53,7 @@ Le componenti principali della ricerca sono:
 ### Database
 Il seguente è lo schema ER della base di dati allo stato più recente (immagine dark mode).
 
-<img src='static/img/er-tr.png'>
+<img src='static/other/er-tr.png'>
 
 La base di dati è stata sviluppata per l'utilizzo su MySQL/MariaDB (versione non verificata).
 

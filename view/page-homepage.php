@@ -18,11 +18,11 @@
 <div class="p-1 bg-gray-900"></div>
 <div id="home-tc1" class="tab-content hidden py-2">
     <h2 class="text-gray-600 my-4 lg:m-6 text-2xl lg:text-3xl">Documentazione</h2>
-    <iframe width="100%" height="800" src="static/document/riferimento.pdf"></iframe>
+    <iframe width="100%" height="800" src="static/other/riferimento.pdf"></iframe>
 </div>
 <div id="home-tc2" class="tab-content hidden py-2">
     <h2 class="text-gray-600 my-4 lg:m-6 text-2xl lg:text-3xl">Schema concettuale</h2>
-    <img class="object-contain mt-8 mr-8" src="static/img/er.png" alt="Schema concettuale (ER) in formato PNG.">
+    <img class="object-contain mt-8 mr-8" src="static/other/er.png" alt="Schema concettuale (ER) in formato PNG.">
 </div>
 <div id="home-tc3" class="tab-content hidden py-2">
     <h2 class="text-gray-600 text-2xl lg:text-3xl mt-4 lg:m-6">Implementazione fisica</h2>

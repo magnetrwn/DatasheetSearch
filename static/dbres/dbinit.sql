@@ -24,7 +24,7 @@ CREATE TABLE utente (
 CREATE TABLE package (
   id_package BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   alias VARCHAR(512),
-  icona VARCHAR(128) DEFAULT 'dynamic/no-logo.png'
+  icona VARCHAR(128) DEFAULT 'static/no-logo.png'
 );
 
 -- Tabelle con chiavi esterne
@@ -33,7 +33,7 @@ CREATE TABLE package (
 CREATE TABLE azienda (
   nome VARCHAR(128) PRIMARY KEY,
   link VARCHAR(128),
-  logo VARCHAR(128) DEFAULT 'dynamic/no-logo.png'
+  logo VARCHAR(128) DEFAULT 'static/no-logo.png'
 );
 
 CREATE TABLE listino (
@@ -62,6 +62,7 @@ CREATE TABLE componente (
 CREATE TABLE datasheet (
   nome VARCHAR(128),
   versione VARCHAR(32),
+  icona VARCHAR(128) DEFAULT 'static/no-logo.png',
   fk_componente_id_componente BIGINT UNSIGNED,
   data DATE,
   
@@ -72,26 +73,6 @@ CREATE TABLE datasheet (
     ON DELETE NO ACTION
 );
 
--- CREATE TABLE file (
---   id_file BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
---   url_file VARCHAR(512),
---   fk_datasheet_nome VARCHAR(128),
---   fk_datasheet_versione VARCHAR(32),
---   fk_package_id_package BIGINT UNSIGNED,
---   
---   FOREIGN KEY(fk_datasheet_nome, fk_datasheet_versione) REFERENCES datasheet(nome, versione)
---     ON UPDATE CASCADE
---     ON DELETE SET NULL,
---   FOREIGN KEY(fk_package_id_package) REFERENCES package(id_package)
---     ON UPDATE CASCADE
---     ON DELETE SET NULL
--- );
-
--- ALTER TABLE azienda ADD
---   FOREIGN KEY(fk_file_id_file) REFERENCES file(id_file)
---     ON UPDATE CASCADE
---     ON DELETE NO ACTION;
-    
 -- Tabelle da associazioni molti a molti
 
 CREATE TABLE preferiti_d (
@@ -219,28 +200,12 @@ INSERT INTO componente(alias, descrizione, stato_produzione, fk_listino_famiglia
   ('IRFZ44N', 'N-channel enhancement mode standard level field-effect power transistor in a plastic envelope using "trench" technology. The device features very low on-state resistance and has integral zener diodes giving ESD protection up to 2kV. It is intended for use in switched mode power supplies and general purpose switching applications.', 'In produzione', 'IR** MOSFET'),
   ('SN74HCT04', '6-ch, 4.5-V to 5.5-V inverters with TTL-compatible CMOS inputs', 'In produzione', 'SN*4HCT');
 
-INSERT INTO datasheet VALUES
+INSERT INTO datasheet(nome, versione, fk_componente_id_componente, data) VALUES
   ('SN74HCT04', 'TI 08 Jul 2004', 5, CURRENT_DATE()),
   ('IRFZ44N', 'Vishay 01 Jan 2022', 4, CURRENT_DATE()),
   ('IRFZ44ND', 'Samsung v1.2', 4, CURRENT_DATE()),
   ('IRFZ44ND', 'Samsung v1.0', 4, CURRENT_DATE()),
   ('IRFZ44N', 'Infineon 2012', 4, CURRENT_DATE());
-
--- INSERT INTO file VALUES
---   (600, 'dynamic/no-logo.png', NULL, NULL, NULL),
---   (DEFAULT, 'dynamic/datasheets/SN74HCT04-907253.pdf', 'SN74HCT04', 'TI 08 Jul 2004', 5),
---   (DEFAULT, 'dynamic/datasheets/IRFZ44N-879023.pdf', 'IRFZ44N', 'Vishay 01 Jan 2022', 20),
---   (DEFAULT, 'dynamic/datasheets/IRFZ44N-879023.pdf', 'IRFZ44N', 'Vishay 01 Jan 2022', 23),
---   (DEFAULT, 'dynamic/datasheets/IRFZ44N-879023.pdf', 'IRFZ44N', 'Vishay 01 Jan 2022', 37),
---   (DEFAULT, 'dynamic/datasheets/IRFZ44N-563456.pdf', 'IRFZ44N', 'Infineon 2012', 10),
---   (DEFAULT, 'dynamic/datasheets/IRFZ44ND-564563.pdf', 'IRFZ44ND', 'Samsung v1.2', 20),
---   (DEFAULT, 'dynamic/datasheets/IRFZ44ND-002342.pdf', 'IRFZ44ND', 'Samsung v1.0', 11),
---   (DEFAULT, 'dynamic/datasheets/logo1.png', NULL, NULL, NULL),
---   (DEFAULT, 'dynamic/datasheets/logo2.png', NULL, NULL, NULL),
---   (DEFAULT, 'dynamic/datasheets/logo3.png', NULL, NULL, NULL),
---   (DEFAULT, 'dynamic/datasheets/ASDFADR.gif', NULL, NULL, NULL);
-
--- UPDATE azienda SET fk_file_id_file=600;
 
 INSERT INTO preferiti_d VALUES
   ('IRFZ44N', 'Infineon 2012', 'admin'),

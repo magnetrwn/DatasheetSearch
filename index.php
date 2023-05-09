@@ -52,14 +52,14 @@
         case "success":
             // 200
             include("view/page-html-200.php");
-            include("view/page-top.php");
             break;
         default:
             // 404
             include("view/page-html-404.php");
-            include("view/page-top.php");
             break;
     }
+
+    include("view/page-top.php");
 
     switch($goto) {
         // Costruzione pagina effettiva
@@ -188,6 +188,7 @@
 
         case "details":
             // TODO: pagina nel dettaglio su una colonna (solo datasheet?)
+            include("view/details/page-details-datasheet.php");
             break;
 
         case "success":
