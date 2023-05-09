@@ -2,3 +2,5 @@
 static/dbres/usergen-out.sql
 # Output di changepwd.py
 static/dbres/changepwd-out.sql
+# Datasheet
+dynamic/ds/*

@@ -7,12 +7,12 @@
 <div class="mx-20 2xl:mx-60 px-4 py-8">
   <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
     <div class="md:col-span-2">
-      <h1 class="text-2xl font-bold mb-4"><?php echo $datasheetname; ?></h1>
+      <h1 class="text-2xl font-bold mb-4"><?php echo strstr($detaildata['cpalias'], ",", true).": ".$datasheetname; ?></h1>
       <p class="text-md mb-4"><?php echo $detaildata['cpdesc']; ?></p>
       <div class="flex flex-wrap mb-8">
         <div class="mt-8 text-sm w-full md:w-1/2 lg:w-1/3">
           <p class="text-gray-500 mb-1">Azienda produttrice:</p>
-          <p class="text-lg"><?php echo $detaildata['aznome']; ?></p>
+          <a href="<?php echo $detaildata['link']; ?>" class="text-lg text-blue-500 hover:underline"><?php echo $detaildata['aznome']; ?></a>
         </div>
         <div class="mt-8 text-sm w-full md:w-1/2 lg:w-1/3">
           <p class="text-gray-500 mb-1">Famiglia:</p>
@@ -20,7 +20,7 @@
         </div>
         <div class="mt-8 text-sm w-full md:w-1/2 lg:w-1/3">
           <p class="text-gray-500 mb-1">Datasheet:</p>
-          <a href="dynamic/ds/<?php echo $datasheetname.$datasheetversion; ?>.pdf" class="text-lg text-blue-500 hover:underline">Scarica Datasheet</a>
+          <a href="dynamic/ds/<?php echo strtr($datasheetname.$datasheetversion, ' ?/&=', '_'); ?>.pdf" class="text-lg text-blue-500 hover:underline">Scarica Datasheet</a>
         </div>
       </div>
       <div class="border-t border-gray-300 py-4">
@@ -28,12 +28,30 @@
         <table class="w-full">
           <tbody>
             <tr>
-              <td class="border-t border-gray-300 py-2 px-4 font-medium text-gray-500">Package disponibili:</td>
-              <td class="border-t border-gray-300 py-2 px-4">...</td>
+              <td class="border-t border-gray-300 py-2 px-4 font-medium text-gray-500">Package esistenti</td>
+              <td class="border-t border-gray-300 py-2 px-4">
+                <?php 
+                  $addcomma=false; 
+                  while($pkgname = mysqli_fetch_assoc($detailpackages)) { 
+                    if($addcomma)
+                      echo ", "; 
+                    echo $pkgname["alias"]; 
+                    $addcomma = true;
+                  }
+                ?></td>
             </tr>
             <tr>
-              <td class="border-t border-gray-300 py-2 px-4 font-medium text-gray-500">...</td>
-              <td class="border-t border-gray-300 py-2 px-4">...</td>
+              <td class="border-t border-gray-300 py-2 px-4 font-medium text-gray-500">Componenti correlati</td>
+              <td class="border-t border-gray-300 py-2 px-4">
+                <?php 
+                  $addcomma=false; 
+                  foreach(explode(",", $detaildata['cpalias']) as $relatedname) {
+                    if($addcomma)
+                      echo ", "; 
+                    echo $relatedname; 
+                    $addcomma = true;
+                  }
+                ?></td>
             </tr>
           </tbody>
         </table>

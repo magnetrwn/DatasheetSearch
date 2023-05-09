@@ -136,104 +136,77 @@ CREATE TABLE disponibile (
 -- INSERIMENTO TUPLE --
 -- ----------------- --
 
-INSERT INTO utente(username, email) VALUES
-  ('admin', 'admin@noreply.admin.local'),
-  ('TechGuru1', 'techguru@gmail.com'),
-  ('garden-lover1', 'gardenlover@gmail.com'),
-  ('B00KW0RM', 'bookworm@gmail.com'),
-  ('raja-ramos', 'rajaramos@google.ca'),
-  ('SerinaHodges', 'serinahodges3652@outlook.com'),
-  ('ronanlowery', 'ronanlowery@yahoo.com'),
-  ('owen87', 'owenhoward8710@outlook.ca'),
-  ('amurray', 'alimurray@outlook.org'),
-  ('fITNESSfAN', 'fitnessfan@gmail.com'),
-  ('trvlbg', 'travelbug@gmail.com'),
-  ('foooooodie', 'foodie@gmail.com'),
-  ('FilmFanatic', 'filmfanatic@gmail.com'),
-  ('hiking-enthusiast', 'hikingenthusiast@gmail.com'),
-  ('MUSICALMAVEN1', 'musicalmaven@gmail.com');
-
+INSERT INTO utente VALUES
+  ('admin', 'admin@noreply.admin.local', '652ac13906f8b32fc1a94d31c0f24df5', 'ba1f2511fc30423bdbb183fe33f3dd0f', DEFAULT);
 UPDATE utente SET salt = MD5(UUID());
 UPDATE utente SET password_md5_salt = MD5(CONCAT(username, salt));
--- Per ora le password sono i loro username
-SYSTEM echo 'Warning: Default users have their passwords set to username.';
+-- admin:admin
 
 INSERT INTO package(alias) VALUES
-  ('BGA'), ('CAN'), ('CERDIP'), ('CFP'), ('CLCC'), ('CPGA'), ('CQFP'), ('DIP'),
-  ('FBGA'), ('FQFP'),  ('HBGA'), ('HFBGA'), ('HFQFP'),  ('HLFQFP'), ('HLQFP'),
-  ('HMSOP'), ('HQFP'),  ('HSIP'), ('HSOP'), ('HSSOP'), ('HTFQFP'), ('HTQFP'),
-  ('HTSSOP'), ('HUSON'), ('HVQFN'), ('HWQFN'), ('HWSON'), ('HXQFN'), ('HXSON'),
-  ('LBGA'), ('LFBGA'), ('LFQFP'), ('LQFP'),  ('LSSOP'), ('MSOP'), ('OSON'),
-  ('PLCC'), ('QFP'),  ('SC70'), ('SDIP'), ('SIP'), ('SOP'), ('SOT23'),
-  ('SSOP'), ('TFBGA'), ('TFLGA'), ('TFQFP'), ('TQFP'),  ('TSOP'), ('TSOT'),
-  ('TSSOP'), ('UFLGA'), ('UQFN'), ('USON'), ('VFBGA'), ('VFLGA'), ('VQFN'),
-  ('WFLGA'), ('WLCSP'), ('WQFN'), ('WSON'), ('XFLGA'), ('XSON'), ('ZIP');
+('BGA'), ('CAN'), ('CERDIP'), ('CFP'), ('CLCC'),  -- 5
+('CPGA'), ('CQFP'), ('DIP'), ('FBGA'), ('FQFP'),  -- 10
+('HBGA'), ('HFBGA'), ('HFQFP'), ('HLFQFP'), ('HLQFP'),  -- 15
+('HMSOP'), ('HQFP'), ('HSIP'), ('HSOP'), ('HSSOP'),  -- 20
+('HTFQFP'), ('HTQFP'), ('HTSSOP'), ('HUSON'), ('HVQFN'),  -- 25
+('HWQFN'), ('HWSON'), ('HXQFN'), ('HXSON'), ('LBGA'),  -- 30
+('LFBGA'), ('LFQFP'), ('LQFP'), ('LSSOP'), ('MSOP'),  -- 35
+('OSON'), ('PLCC'), ('QFP'), ('SC70'), ('SDIP'),  -- 40
+('SIP'), ('SOIC'), ('SOT23'), ('SSOP'), ('TFBGA'),  -- 45
+('TFLGA'), ('TFQFP'), ('TQFP'), ('TSOP'), ('TSOT'),  -- 50
+('TSSOP'), ('UFLGA'), ('UQFN'), ('USON'), ('VFBGA'),  -- 55
+('VFLGA'), ('VQFN'), ('VSSOP'), ('WFLGA'), ('WLCSP'),  -- 60
+('WQFN'), ('WSON'), ('XFLGA'), ('XSON'), ('ZIP');  -- 65
 
 INSERT INTO azienda(nome, link) VALUES
-  ('STMicroelectronics', 'http://google.com'),
-  ('ON Semiconductor', 'http://whatsapp.com'),
-  ('Diodes Incorporated', 'https://wikipedia.org'),
-  ('Texas Instruments', 'http://walmart.com'),
-  ('Infineon Technologies', 'https://guardian.co.uk'),
-  ('Acme Inc.', 'https://www.acme.com'),
-  ('Global Industries', 'https://www.globalindustries.com'),
-  ('Jupiter Corporation', 'https://www.jupitercorp.com'),
-  ('Nebula Enterprises', 'https://www.nebulaent.com'),
-  ('Cosmic Innovations', 'https://www.cosmicinnovations.com'),
-  ('Galactic Ventures', 'https://www.galacticventures.net'),
-  ('Stellar Solutions', 'https://www.stellarsolutions.com'),
-  ('Orion Enterprises', 'https://www.orionent.com'),
-  ('Nova Corporation', 'https://www.novacorp.net'),
-  ('Saturn Systems', 'https://www.saturnsystems.com');
+  ('Intel Corporation', 'https://www.intel.com/'),
+  ('Samsung Electronics', 'https://www.samsung.com/us/'),
+  ('Taiwan Semiconductor Manufacturing Company', 'https://www.tsmc.com/'),
+  ('SK Hynix', 'https://www.skhynix.com/'),
+  ('Broadcom', 'https://www.broadcom.com/'),
+  ('Texas Instruments', 'https://www.ti.com/'),
+  ('Qualcomm', 'https://www.qualcomm.com/'),
+  ('Advanced Micro Devices', 'https://www.amd.com/'),
+  ('NVIDIA Corporation', 'https://www.nvidia.com/'),
+  ('Micron Technology', 'https://www.micron.com/'),
+  ('Infineon Technologies', 'https://www.infineon.com/'),
+  ('NXP Semiconductors', 'https://www.nxp.com/'),
+  ('Renesas Electronics Corporation', 'https://www.renesas.com/'),
+  ('Analog Devices', 'https://www.analog.com/'),
+  ('ON Semiconductor', 'https://www.onsemi.com/'),
+  ('STMicroelectronics', 'https://www.st.com/');
 
 INSERT INTO listino VALUES
-  ('SN*4LS', '74 Low-power Schottky logic family', 'Texas Instruments', CURRENT_DATE()),
-  ('IR** MOSFET', 'High Current Power MOSFETs', 'Infineon Technologies', CURRENT_DATE()),
-  ('MC78***', '1.0A Positive Voltage Regulators', 'ON Semiconductor', CURRENT_DATE()),
-  ('LM358', 'Low Power Dual Operational Amplifiers', 'Diodes Incorporated', CURRENT_DATE()),
-  ('SN*4HCT', '74 High-speed CMOS with TTL-compatible input thresholds', 'Texas Instruments', CURRENT_DATE());
+  ('LM*58', 'Operational Amplifiers', 'Texas Instruments', CURRENT_DATE());
 
 INSERT INTO componente(alias, descrizione, stato_produzione, fk_listino_famiglia) VALUES
-  ('LM358', 'LOW POWER DUAL OPERATIONAL AMPLIFIER', 'In produzione', 'LM358'),
-  ('IRFZ24N', '55V Single N-Channel Power MOSFET in a TO-220 package', 'In produzione', 'IR** MOSFET'),
-  ('IRFZ34N', '55V Single N-Channel Power MOSFET in a TO-220 package', 'In produzione', 'IR** MOSFET'),
-  ('IRFZ44N', 'N-channel enhancement mode standard level field-effect power transistor in a plastic envelope using "trench" technology. The device features very low on-state resistance and has integral zener diodes giving ESD protection up to 2kV. It is intended for use in switched mode power supplies and general purpose switching applications.', 'In produzione', 'IR** MOSFET'),
-  ('SN74HCT04', '6-ch, 4.5-V to 5.5-V inverters with TTL-compatible CMOS inputs', 'In produzione', 'SN*4HCT');
+  ('LM358,LM158,LM158A,LM258,LM258A,LM2904,LM2904B,LM2904BA,LM2904V,LM358A,LM358B,LM358BA', 'Industry-Standard Dual Operational Amplifiers', 'In produzione', 'LM*58');
 
 INSERT INTO datasheet(nome, versione, fk_componente_id_componente, data) VALUES
-  ('SN74HCT04', 'TI 08 Jul 2004', 5, CURRENT_DATE()),
-  ('IRFZ44N', 'Vishay 01 Jan 2022', 4, CURRENT_DATE()),
-  ('IRFZ44ND', 'Samsung v1.2', 4, CURRENT_DATE()),
-  ('IRFZ44ND', 'Samsung v1.0', 4, CURRENT_DATE()),
-  ('IRFZ44N', 'Infineon 2012', 4, CURRENT_DATE());
+  ('Industry-Standard Dual Operational Amplifiers', 'SLOS068AA March 2022', 1, CURRENT_DATE());
 
-INSERT INTO preferiti_d VALUES
-  ('IRFZ44N', 'Infineon 2012', 'admin'),
-  ('IRFZ44ND', 'Samsung v1.0', 'admin'),
-  ('IRFZ44N', 'Vishay 01 Jan 2022', 'admin'),
-  ('IRFZ44ND', 'Samsung v1.0', 'TechGuru1'),
-  ('SN74HCT04', 'TI 08 Jul 2004', 'admin');
+-- INSERT INTO preferiti_d VALUES
+--   ('IRFZ44N', 'Infineon 2012', 'admin'),
+--   ('IRFZ44ND', 'Samsung v1.0', 'admin'),
+--   ('IRFZ44N', 'Vishay 01 Jan 2022', 'admin'),
+--   ('IRFZ44ND', 'Samsung v1.0', 'TechGuru1'),
+--   ('SN74HCT04', 'TI 08 Jul 2004', 'admin');
 
-INSERT INTO preferiti_az VALUES
-  ('STMicroelectronics', 'admin'),
-  ('Infineon Technologies', 'admin'),
-  ('STMicroelectronics', 'TechGuru1'),
-  ('Infineon Technologies', 'TechGuru1'),
-  ('Texas Instruments', 'admin');
+-- INSERT INTO preferiti_az VALUES
+--   ('STMicroelectronics', 'admin'),
+--   ('Infineon Technologies', 'admin'),
+--   ('STMicroelectronics', 'TechGuru1'),
+--   ('Infineon Technologies', 'TechGuru1'),
+--   ('Texas Instruments', 'admin');
 
-INSERT INTO preferiti_p VALUES
-  (8, 'admin'), 
-  (8, 'TechGuru1'), 
-  (11, 'admin'), 
-  (24, 'admin'), 
-  (30, 'admin');
+-- INSERT INTO preferiti_p VALUES
+--   (8, 'admin'), 
+--   (8, 'TechGuru1'), 
+--   (11, 'admin'), 
+--   (24, 'admin'), 
+--   (30, 'admin');
 
 INSERT INTO disponibile VALUES
   (1, 8),
-  (5, 8),
-  (2, 5),
-  (2, 20),
-  (2, 21),
-  (4, 21);
-
-SYSTEM echo 'Info: Done.';
+  (1, 42),
+  (1, 51),
+  (1, 58);

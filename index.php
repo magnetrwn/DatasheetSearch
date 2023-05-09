@@ -201,13 +201,20 @@
                 $datasheetname = explode(",,", base64_decode($ds))[0];
                 $datasheetversion = explode(",,", base64_decode($ds))[1];         
                 $detaildata = mysqli_fetch_assoc(mysqli_query($conn, 
-                    "SELECT famiglia, icona, azienda.nome AS 'aznome', componente.descrizione AS 'cpdesc' FROM datasheet
+                    "SELECT famiglia, icona, link, azienda.nome AS 'aznome', componente.descrizione AS 'cpdesc', componente.alias AS 'cpalias' FROM datasheet
                     JOIN componente ON fk_componente_id_componente=id_componente 
                     JOIN listino ON fk_listino_famiglia=famiglia 
                     JOIN azienda ON fk_azienda_nome=azienda.nome 
                     WHERE datasheet.nome='$datasheetname' AND datasheet.versione='$datasheetversion' LIMIT 1;"
                 ));
-                //foreach(array_keys($detaildata) as $xs) echo $xs."&nbsp;&nbsp;";
+                $detailpackages = mysqli_query($conn, 
+                    "SELECT package.alias FROM datasheet
+                    JOIN componente ON datasheet.fk_componente_id_componente=id_componente 
+                    JOIN disponibile ON disponibile.fk_componente_id_componente=id_componente
+                    JOIN package ON fk_package_id_package=id_package 
+                    WHERE datasheet.nome='$datasheetname' AND datasheet.versione='$datasheetversion'
+                    GROUP BY package.alias;"
+                );
                 close_mysql_conn($conn);
                 include("view/details/page-details-datasheet.php");
             }
