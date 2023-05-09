@@ -10,14 +10,14 @@
     $cleanusr = htmlspecialchars($plainusr, ENT_COMPAT, "ISO-8859-1", true);
 
     // Cerchiamo l'utente per ottenere il suo salt, poi calcoliamo md5 password+salt (con mysqli_real_escape_string vs. SQL Injection)
-    $usrsalt = mysqli_query($conn, "SELECT salt FROM utente WHERE username='".mysqli_real_escape_string($conn, $cleanusr)."';");
+    $usrsalt = mysqli_query($conn, "SELECT salt FROM utente WHERE username='".mysqli_real_escape_string($conn, $cleanusr)."' LIMIT 1;");
     if(mysqli_num_rows($usrsalt) != 1)
       return false;
     $usrsalt = mysqli_fetch_assoc($usrsalt)["salt"];
     $md5saltedpwd = md5($plainpwd.$usrsalt);
 
     // Diamo valido il login se la password è giusta (con hash_equals e mysqli_real_escape_string vs. PHP Timing Attack e SQL Injection)
-    $correctmd5saltedpwd = mysqli_fetch_assoc(mysqli_query($conn, "SELECT password_md5_salt FROM utente WHERE username='".mysqli_real_escape_string($conn, $cleanusr)."';"))["password_md5_salt"];
+    $correctmd5saltedpwd = mysqli_fetch_assoc(mysqli_query($conn, "SELECT password_md5_salt FROM utente WHERE username='".mysqli_real_escape_string($conn, $cleanusr)."'LIMIT 1;"))["password_md5_salt"];
     close_mysql_conn($conn);
     if(hash_equals($correctmd5saltedpwd, $md5saltedpwd)) {
       $_SESSION["user"]=$cleanusr;

@@ -77,8 +77,7 @@
             // Pagina login
             include_once("model/util-js.php");
             if(isset($_SESSION["user"])) {
-                // Se già loggato, effettua il logout e rigenera il session_id usando destroy, vedi Session in alto
-                unset($_SESSION);
+                // Se già loggato, effettua il logout e rigenera il session_id usando GET destroy, vedi Session in alto
                 session_destroy();
                 redirect_js("index.php?goto=homepage&destroy");
             }
@@ -134,12 +133,9 @@
         case "package": // no icona
             // La view autolist costruisce tabelle di visualizzazione usando il $goto, quindi solo queste tabelle
             include_once("model/util-js.php");
-            if(!isset($_SESSION["user"])) {
+            if(!isset($_SESSION["user"]))
                 // Se non è loggato, mostra la pagina di login
-                unset($_SESSION);
-                session_destroy();
                 redirect_js("index.php?goto=login");
-            }
             else {
                 // Genera una tabella UI contenente la tabella del DB
                 include_once("model/util-search.php");
@@ -187,8 +183,34 @@
             break;
 
         case "details":
-            // TODO: pagina nel dettaglio su una colonna (solo datasheet?)
-            include("view/details/page-details-datasheet.php");
+            // Mostra dettaglio di un datasheet specifico, assieme al link download
+            include_once("model/util-js.php");
+            if(!isset($_SESSION["user"]))
+                // Se non è loggato, mostra la pagina di login
+                redirect_js("index.php?goto=login");
+            else if(!isset($_GET["ds"]) || $_GET["ds"] == "" || strlen($_GET["ds"]) > 512)
+                // Se il parametro "ds", unione delle due chiavi primarie in base64, e assente
+                redirect_js("index.php?goto=homepage");
+            else {
+                // Visualizza le informazioni dettagliate a partire dal datasheet
+                include_once("model/mgmt-db-conn.php");
+                $datasheetname = base64_decode($_GET["ds"]);
+                $conn = open_mysql_conn();
+                $ds = mysqli_real_escape_string($conn, htmlspecialchars($_GET["ds"], ENT_COMPAT, "ISO-8859-1", true));
+                // In "view/page-search-block.php" si crea GET "ds": base64 della concatenazione delle due chiavi primarie, divise da ",,"
+                $datasheetname = explode(",,", base64_decode($ds))[0];
+                $datasheetversion = explode(",,", base64_decode($ds))[1];         
+                $detaildata = mysqli_fetch_assoc(mysqli_query($conn, 
+                    "SELECT famiglia, icona, azienda.nome AS 'aznome', componente.descrizione AS 'cpdesc' FROM datasheet
+                    JOIN componente ON fk_componente_id_componente=id_componente 
+                    JOIN listino ON fk_listino_famiglia=famiglia 
+                    JOIN azienda ON fk_azienda_nome=azienda.nome 
+                    WHERE datasheet.nome='$datasheetname' AND datasheet.versione='$datasheetversion' LIMIT 1;"
+                ));
+                //foreach(array_keys($detaildata) as $xs) echo $xs."&nbsp;&nbsp;";
+                close_mysql_conn($conn);
+                include("view/details/page-details-datasheet.php");
+            }
             break;
 
         case "success":

@@ -25,6 +25,7 @@
             <?php 
                 while($linksrow = mysqli_fetch_assoc($links)) {
                     $linklabel = $linksrow["nome"]." (".$linksrow["versione"].")";
+                    $datasheetid = base64_encode($linksrow["nome"].",,".$linksrow["versione"]);
                     include("view/search/page-search-file.php");
                 }
             ?>

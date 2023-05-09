@@ -24,7 +24,7 @@
           foreach($row as $colname => $column) {
             $cleancolumn = htmlspecialchars($column, ENT_COMPAT, "ISO-8859-1", true);
             if(is_hypertext_link($column))
-              echo "<td class='px-10 py-4'><a href='$cleancolumn' class='text-blue-600'>$cleancolumn</a></td>";
+              echo "<td class='px-10 py-4'><a href='$cleancolumn' class='text-blue-500 hover:underline'>$cleancolumn</a></td>";
             else
               echo "<td class='px-10 py-4'>$cleancolumn</td>";
           }
