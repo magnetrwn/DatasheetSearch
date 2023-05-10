@@ -53,6 +53,7 @@
             // 200
             include("view/page-html-200.php");
             break;
+        case "404":
         default:
             // 404
             include("view/page-html-404.php");
@@ -168,7 +169,10 @@
                             $alttitle = $searchrow["stato_produzione"];
                             $cid = $searchrow["id_componente"];
                             $conn = open_mysql_conn();
-                            $links = mysqli_query($conn, "SELECT * FROM datasheet WHERE fk_componente_id_componente='$cid';");
+                            $links = mysqli_query($conn, 
+                                "SELECT * FROM datasheet
+                                JOIN documentato ON id_datasheet=fk_datasheet_id_datasheet 
+                                WHERE fk_componente_id_componente='$cid';");
                             close_mysql_conn($conn);
                             include("view/search/page-search-block.php");
                         }
@@ -189,30 +193,34 @@
                 // Se non è loggato, mostra la pagina di login
                 redirect_js("index.php?goto=login");
             else if(!isset($_GET["ds"]) || $_GET["ds"] == "" || strlen($_GET["ds"]) > 512)
-                // Se il parametro "ds", unione delle due chiavi primarie in base64, e assente
                 redirect_js("index.php?goto=homepage");
             else {
                 // Visualizza le informazioni dettagliate a partire dal datasheet
                 include_once("model/mgmt-db-conn.php");
-                $datasheetname = base64_decode($_GET["ds"]);
                 $conn = open_mysql_conn();
                 $ds = mysqli_real_escape_string($conn, htmlspecialchars($_GET["ds"], ENT_COMPAT, "ISO-8859-1", true));
-                // In "view/page-search-block.php" si crea GET "ds": base64 della concatenazione delle due chiavi primarie, divise da ",,"
-                $datasheetname = explode(",,", base64_decode($ds))[0];
-                $datasheetversion = explode(",,", base64_decode($ds))[1];         
-                $detaildata = mysqli_fetch_assoc(mysqli_query($conn, 
-                    "SELECT famiglia, icona, link, azienda.nome AS 'aznome', componente.descrizione AS 'cpdesc', componente.alias AS 'cpalias' FROM datasheet
+                $detaildata = mysqli_query($conn, 
+                    "SELECT famiglia, icona, link, azienda.nome AS 'aznome', componente.descrizione AS 'cpdesc', componente.alias AS 'cpalias', datasheet.nome AS 'dsnome', datasheet.versione AS 'dsver' FROM datasheet
+                    JOIN documentato ON id_datasheet=fk_datasheet_id_datasheet
                     JOIN componente ON fk_componente_id_componente=id_componente 
                     JOIN listino ON fk_listino_famiglia=famiglia 
-                    JOIN azienda ON fk_azienda_nome=azienda.nome 
-                    WHERE datasheet.nome='$datasheetname' AND datasheet.versione='$datasheetversion' LIMIT 1;"
-                ));
+                    JOIN azienda ON listino.fk_azienda_nome=azienda.nome 
+                    WHERE id_datasheet='$ds' LIMIT 1;"
+                );
+                if(mysqli_num_rows($detaildata) != 1) {
+                    redirect_js("index.php?goto=404");
+                    break;
+                }
+                else
+                    $detaildata = mysqli_fetch_assoc($detaildata);
+                    
                 $detailpackages = mysqli_query($conn, 
                     "SELECT package.alias FROM datasheet
-                    JOIN componente ON datasheet.fk_componente_id_componente=id_componente 
+                    JOIN documentato ON id_datasheet=fk_datasheet_id_datasheet
+                    JOIN componente ON documentato.fk_componente_id_componente=id_componente 
                     JOIN disponibile ON disponibile.fk_componente_id_componente=id_componente
                     JOIN package ON fk_package_id_package=id_package 
-                    WHERE datasheet.nome='$datasheetname' AND datasheet.versione='$datasheetversion'
+                    WHERE id_datasheet='$ds'
                     GROUP BY package.alias;"
                 );
                 close_mysql_conn($conn);
@@ -225,6 +233,7 @@
             include("view/page-success.php");
             break;
 
+        case "404":
         default:
             // Pagina non implementata
             include("view/page-404.html");

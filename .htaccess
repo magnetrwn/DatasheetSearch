@@ -1,0 +1,2 @@
+# Cambiare valore sul proprio setup
+php_value auto_prepend_file "/var/vmshared/www/index.php"
