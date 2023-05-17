@@ -32,9 +32,16 @@
       ////////////////////
     
     $loginlabel = "Login";
-    if(isset($_SESSION["user"]))
+    if(isset($_SESSION["user"])) {
         // Imposta logout invece di login
         $loginlabel = "Logout";
+        // Controlliamo ed impostiamo modalita admin solo per gli admin, solo una volta per sessione
+        if(!isset($_SESSION["admin"]))
+            if(strpos($_SESSION["user"], "admin_") === 0)
+                $_SESSION["admin"] = true;
+            else 
+                $_SESSION["admin"] = false;
+    }
 
     switch($goto) {
         // Costruzione pagina, head e top

@@ -34,6 +34,10 @@
     $cleanusr = htmlspecialchars($plainusr, ENT_COMPAT, "ISO-8859-1", true);
     $cleanmail = filter_var($plainmail, FILTER_SANITIZE_EMAIL);
 
+    // Controlla se l'utente usa la parola "admin" all'inizio username
+    if(strpos($cleanusr, "admin") === 0)
+      return false;
+
     // Controlla se la mail è valida
     if(!filter_var($cleanmail, FILTER_VALIDATE_EMAIL))
       return false;
