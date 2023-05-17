@@ -11,7 +11,10 @@ Datasheet Search è un'applicazione web sviluppata per l'anno V 2022/2023. Segue
 + Visualizzare il contenuto totale delle tabelle del database rilevanti agli utenti loggati
 + Permettere la ricerca di datasheet, listini e componenti da un UI facile da utilizzare
 + Permettere la aggiunta ai preferiti di certe categorie di contenuto, che devono apparire prima nei risultati
++ Permettere solo ad alcune categorie di utenti di accedere a contenuti speciali e di controllo (admin management)
 + ... WORK IN PROGRESS ...
+
+... DA MODIFICARE ...
 
 Il concetto base della web app è di <u>fornire informazioni relative a componenti elettronici in modo rapido tramite una barra di ricerca ed un raccoglimento dei risultati ben definito.</u> La funzionalità di ricerca potrebbe richiedere l'implementazione di uno stemmer e dell'algoritmo di TF-IDF.
 
@@ -29,6 +32,9 @@ Il login degli utenti consiste in due query SELECT prima per ricevere il salt e 
 
 Nonostante salted MD5 sia un metodo insicuro di preservare i dati di autenticazione degli utenti, in questa web app si implementa a solo scopo didattico. Un metodo interessante oltre che più sicuro consiste nella libreria bcrypt, ampiamente utilizzata.
 
+### Utenti Amministratore
+Per la gestione degli utenti amministratore si utilizza un semplice sistema di nomenclatura, in cui gli unici username che possono iniziare con `admin` sono quelli degli amministratori, e la registrazione di utenti con username da admin è proibita, vedi `model/mgmt-auth.php` (in particolare gli username che `index.php` considera di amministratore sono quelli che iniziano per `admin_`).
+
 ### ID Sessione
 La web app genera un ID di sessione, `dssessionid`, in modo diverso dal generatore di cookie ID sessione di PHP. Il nuovo session ID è di una lunghezza di 64 caratteri:
 + I primi 32 caratteri sono generati dal calcolo dell'hash MD5 di `$_SERVER['REMOTE_ADDR']`, generando quindi lo stesso valore per gli utenti provenienti da un socket con destinazione remota uguale
@@ -43,17 +49,18 @@ Le componenti principali della ricerca sono:
 + Model
     + `model/util-search.php`
 + View
-    + `view/search/page-autolist.php`, una pagina in grado di generare tabelle visualizzabili a partire solo dal loro nome usando `model/util-search.php`, che sfrutta altri processi di eliminazione di tabelle ad esclusivo uso interno, contenuti in `model/util-db.php`
+    + `view/search/page-autolist.php`, una pagina in grado di generare tabelle visualizzabili a partire solo dal loro nome usando `model/util-search.php`, che sfrutta altri processi di eliminazione di tabelle ad esclusivo uso interno, contenuti in `model/util-db.php`. Da questo view si produce la zona admin, in cui gli amministratori possono modificare il contenuto del sito.
     + `view/search/page-result-block.php`, un singolo blocco di risultato ottenuto dalla ricerca
     + `view/search/page-search-bar.html`, che descrive solo la costruzione della barra di ricerca (un form html)
+    + `view/search/page-search-file.php`
     + `view/search/page-search.php`, contenuto della pagina di ricerca vera e propria
 
-... WORK IN PROGRESS ...
+... DA AGGIORNARE ...
 
 ### Database
-Il seguente è lo schema ER della base di dati allo stato più recente (immagine dark mode).
+Il seguente è lo schema ER della base di dati allo stato più recente.
 
-<img src='static/other/er-tr.png'>
+<img src='static/other/er.png'>
 
 La base di dati è stata sviluppata per l'utilizzo su MySQL/MariaDB (versione non verificata).
 
@@ -62,12 +69,14 @@ La base di dati include le seguenti tabelle:
     + `utente`, la tabella contenente le informazioni degli utenti per l'autenticazione
     + `package`, comprendente i diversi formati fisici di circuiti integrati
 + Tabelle con chiavi esterne
-    + `azienda_produttrice`, che include le aziende produttrici di IC
+    + `azienda`, che include le aziende produttrici di IC
     + `listino`, che descrive il nome della famiglia alla quale appartengono un gruppo di IC, solitamente con nome e specifiche simili
     + `componente`, tabella indicativa di un singolo IC
-    + `datasheet`, che include i riferimenti ad ogni singolo documento, la sua versione e la sua appartenenza ad un componente (chiave primaria composta)
+    + `datasheet`, che include i riferimenti ad ogni singolo documento, la sua versione e la sua appartenenza ad un componente
 + Tabelle da associazioni molti a molti
     + `preferiti_d`, `preferiti_az`, `preferiti_p`, rispettivamente i datasheet, aziende e package preferiti dagli utenti
+
+... DA AGGIORNARE ...
 
 ### Tailwind CSS
 Lo stile grafico utilizzato dall'intera web app si basa completamente sulle funzionalità fornite da [Tailwind CSS](https://tailwindcss.com/), che implementa lo stile degli elementi HTML tramite l'uso di classi prestabilite.
@@ -87,7 +96,8 @@ La web app utilizza procedure standard per la sicurezza, tra cui:
 + PHP Timing Attack: `hash_equals()`
 + SQL Injection: `mysqli_real_escape_string()`
 + Session hijacking: sono presenti meccanismi di generazione e controllo dell'ID sessione (creato in modo diverso da `PHPSESSID`) in `model/mgmt-session.php`
-+ (WORK IN PROGRESS) Verifica del register con una mail contenente codice di verifica, con timeout 120 minuti
++ (WORK IN PROGRESS) Verifica del register con una mail contenente codice di verifica, con timeout 15 minuti
++ Username riservati per gli utenti admin, iniziano con `admin_`
 + ... WORK IN PROGRESS ...
 
 La generazione di gran parte di valori casuali nella web app, come nella generazione del salt o ID sessione, utilizza la funzione sicura `openssl_random_pseudo_bytes()`.
@@ -97,3 +107,7 @@ Al completamento della web app sarà possibile procedere con un penetration test
 ### AJAX
 La web app implementa un controller lato server per le richieste AJAX (`ajax.php`) che è in grado di contattare altre procedure internamente (`model/ajax`). 
 Dal lato client nelle pagine in cui AJAX viene utilizzato sono inclusi gli script (`view/ajax`) necessari che forniscono le funzionalità richieste tramite `XMLHttpRequest()`. 
+
+Al momento si sta lavorando all'aggiunta di funzionalità di infinite scrolling, in cui la funzione di ricerca consegna solo un numero limitato di risultati fino a quando non si scorre verso il basso, migliorando la performance della ricerca.
+
+... WORK IN PROGRESS ...
