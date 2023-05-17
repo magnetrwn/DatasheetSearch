@@ -8,6 +8,9 @@
 							case "register":
 								echo "Registrazione effettuata!";
 								break;
+							case "adminonly":
+								echo "Accesso limitato!";
+								break;
 							default:
 								echo "Operazione riuscita!";
 								break;
@@ -21,6 +24,9 @@
 							case "register":
 								echo "Ora puoi proseguire con la pagina di login.";
 								break;
+							case "adminonly":
+								echo "Solo gli amministratori possono arrivare qui!";
+								break;
 							default:
 								echo "Ora puoi continuare la tua giornata serenamente.";
 								break;
@@ -29,7 +35,7 @@
 			</p>
 			<a href="index.php?goto=<?php 
 				if(isset($_GET["btngoto"]))
-					echo $_GET["btngoto"];
+					echo $_GET["btngoto"]; // TODO: vulnerabile!! cross injection di un altro indirizzo!!
 				else
 					echo "homepage";
 			?>" class="px-8 py-3 font-semibold rounded bg-violet-400 text-gray-900">Continua</a>

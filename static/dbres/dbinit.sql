@@ -151,10 +151,11 @@ CREATE TABLE documentato (
 -- ----------------- --
 
 INSERT INTO utente VALUES
-  ('admin', 'admin@noreply.admin.local', '652ac13906f8b32fc1a94d31c0f24df5', 'ba1f2511fc30423bdbb183fe33f3dd0f', DEFAULT);
+  ('admin_f', 'admin_f@noreply.admin.local', '652ac13906f8b32fc1a94d31c0f24df5', 'ba1f2511fc30423bdbb183fe33f3dd0f', DEFAULT),
+  ('admin_p', 'admin_p@noreply.admin.local', '652ac13906f8b32fc1a94d31c0f24df5', 'ba1f2511fc30423bdbb183fe33f3dd0f', DEFAULT);
 UPDATE utente SET salt = MD5(UUID());
 UPDATE utente SET password_md5_salt = MD5(CONCAT(username, salt));
--- admin:admin
+-- Tutte le password admin sono uguali agli username, usare changepwd.py per cambiarle.
 
 INSERT INTO package(alias) VALUES
 ('BGA'), ('CAN'), ('CERDIP'), ('CFP'), ('CLCC'),  -- 5

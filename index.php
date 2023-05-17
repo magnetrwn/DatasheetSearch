@@ -144,6 +144,9 @@
             if(!isset($_SESSION["user"]))
                 // Se non è loggato, mostra la pagina di login
                 redirect_js("index.php?goto=login");
+            else if(!$_SESSION["admin"])
+                // Avvisa che la zona e riservata agli admin
+                redirect_js("index.php?goto=success&msg=adminonly");
             else {
                 // Genera una tabella UI contenente la tabella del DB
                 include_once("model/util-search.php");
