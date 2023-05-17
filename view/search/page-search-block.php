@@ -1,6 +1,6 @@
 <div class="px-1 lg:px-20 py-6 bg-white odd:bg-gray-200 overflow-hidden">
     <div class="flex items-center px-4 py-6">
-        <img src="static/no-logo.png" alt="Logo" class="w-24 h-24 mr-12">
+        <img src="<?php if(isset($logo)) echo $logo; else echo "static/no-logo.png"; ?>" alt="Logo" class="w-24 mr-12 object-center">
         <div class="flex flex-col">
             <h2 class="text-lg font-semibold"><?php echo $title; ?></h2>
             <p class="text-gray-500 text-sm">
